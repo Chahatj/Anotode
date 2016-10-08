@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">Anotode</string>
+    <string name="title_activity_welcome">Home Screen</string>
+    <string name="login">LogIn</string>
+    <string name="signup">SignUp</string>
+    <string name="start">GOT IT</string>
+
+    <string name="slide_1_title">Welcome to Anotode</string>
+    <string name="slide_1_desc">Read all your Highlited text instantly</string>
+
+    <string name="slide_2_title">Notes</string>
+    <string name="slide_2_desc">Create a custom note</string>
+
+    <string name="slide_3_title">Search</string>
+    <string name="slide_3_desc">Filter highlights by tags or categories</string>
+
+    <string name="slide_4_title">Backup</string>
+    <string name="slide_4_desc">Trust on us.Your note is always safe and secure</string>
+    <string name="title_activity_anotode_store">AnotodeStore</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+
+</resources>
