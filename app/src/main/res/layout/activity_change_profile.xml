@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.example.chahat.anotode.ChangeProfileActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/toolbar"
+        android:background="@color/colorPrimary"
+        app:navigationIcon="@drawable/clearrrrrbutton"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Upload new profile"
+        android:layout_below="@+id/toolbar"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"/>
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/imageButton"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_below="@+id/toolbar"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="80dp"
+        android:background="@drawable/fabtyperoundbutton"
+        android:onClick="onClickProfilePicture"
+        app:border_color="@color/white"
+        app:border_width="3dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Click"
+        android:textColor="@android:color/black"
+        android:id="@+id/textView"
+        android:layout_alignTop="@+id/imageButton"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp" />
+
+    <ProgressBar
+        android:id="@+id/loading_spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:indeterminateTintMode="src_atop"
+        android:indeterminateTint="@color/colorPrimary"
+        android:layout_alignTop="@+id/imageButton"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:visibility="gone"/>
+
+</RelativeLayout>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.example.chahat.anotode.ChangePwdActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/toolbar"
+        android:background="@color/colorPrimary"
+        app:navigationIcon="@drawable/clearrrrrbutton"
+        />
+
+    <TextView
+        android:id="@+id/tv_oldpwd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/toolbar"
+        android:text="Please enter your old Password"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:textSize="15sp"/>
+
+    <EditText
+        android:id="@+id/et_oldpwd"
+        android:inputType="textPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_oldpwd"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"/>
+
+    <TextView
+        android:id="@+id/tv_newpwd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/et_oldpwd"
+        android:text="Please enter your new Password"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:textSize="15sp"/>
+
+    <EditText
+        android:id="@+id/et_newpwd"
+        android:inputType="textPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_newpwd"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"/>
+
+</RelativeLayout>

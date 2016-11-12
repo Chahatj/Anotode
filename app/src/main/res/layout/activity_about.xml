@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.example.chahat.anotode.AboutActivity"
+    android:background="@android:color/white">
+
+    <android.support.v7.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/toolbar"
+        android:background="@color/colorPrimary"
+        app:navigationIcon="@drawable/clearrrrrbutton"
+        />
+
+    <ImageView
+        android:id="@+id/icon_anotode"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:src="@drawable/anotodelogo"
+        android:layout_below="@+id/toolbar"
+        android:layout_centerHorizontal="true"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Anotode"
+        android:layout_below="@+id/icon_anotode"
+        android:layout_centerHorizontal="true"
+        android:textSize="25sp"
+        android:textColor="@color/colorPrimary"
+        />
+
+
+
+</RelativeLayout>

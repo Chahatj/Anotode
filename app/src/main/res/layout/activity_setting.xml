@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.example.chahat.anotode.SettingActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/toolbar"
+        android:background="@color/colorPrimary"
+        app:navigationIcon="@drawable/clearrrrrbutton"
+        >
+
+    </android.support.v7.widget.Toolbar>
+
+    <ImageView
+        android:id="@+id/icon_changepwd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_vpn_key_black"
+        android:layout_below="@+id/toolbar"
+        android:layout_marginTop="11dp"
+        android:layout_marginLeft="10dp"/>
+
+    <TextView
+        android:id="@+id/tv_changepwd"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@+id/toolbar"
+        android:layout_toRightOf="@+id/icon_changepwd"
+        android:layout_marginLeft="10dp"
+        android:text="Change password"
+        android:paddingTop="15dp"
+        android:textColor="@android:color/black"/>
+
+    <View
+        android:id="@+id/view1"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_below="@+id/tv_changepwd"
+        android:background="@android:color/darker_gray"/>
+
+    <ImageView
+        android:id="@+id/icon_username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_person_black_24dp"
+        android:layout_below="@+id/view1"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="13dp"/>
+
+    <TextView
+        android:id="@+id/tv_changeusername"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@+id/view1"
+        android:layout_toRightOf="@+id/icon_username"
+        android:layout_marginLeft="10dp"
+        android:text="Change Username"
+        android:paddingTop="15dp"
+        android:textColor="@android:color/black"/>
+
+    <View
+        android:id="@+id/view2"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_below="@+id/tv_changeusername"
+        android:background="@android:color/darker_gray"/>
+
+    <ImageView
+        android:id="@+id/icon_profile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_insert_emoticon_black_24dp"
+        android:layout_below="@+id/view2"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="13dp"/>
+
+    <TextView
+        android:id="@+id/tv_changeprofile"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@+id/view2"
+        android:layout_toRightOf="@+id/icon_profile"
+        android:layout_marginLeft="10dp"
+        android:text="Change profilepic"
+        android:paddingTop="15dp"
+        android:textColor="@android:color/black"/>
+
+    <View
+        android:id="@+id/view3"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_below="@+id/tv_changeprofile"
+        android:background="@android:color/darker_gray"/>
+
+
+
+    <ImageView
+        android:id="@+id/icon_about"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_help_outline_black_24dp"
+        android:layout_below="@+id/view3"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="13dp"
+        />
+
+    <TextView
+        android:id="@+id/tv_about"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="About and help"
+        android:layout_below="@+id/view3"
+        android:layout_toRightOf="@+id/icon_about"
+        android:textColor="@android:color/black"
+        android:paddingTop="15dp"
+        android:layout_marginLeft="10dp"
+
+        />
+
+
+    <View
+        android:id="@+id/view4"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_below="@+id/tv_about"
+        android:background="@android:color/darker_gray"/>
+
+    <TextView
+        android:id="@+id/tv_signout"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@+id/view4"
+        android:text="Sign out of Anotode"
+        android:textColor="@android:color/black"
+        android:paddingLeft="10dp"
+        android:paddingTop="15dp"/>
+
+    <View
+        android:id="@+id/view5"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_below="@+id/tv_signout"
+        android:background="@android:color/darker_gray"/>
+
+</RelativeLayout>

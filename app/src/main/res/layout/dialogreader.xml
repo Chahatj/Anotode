@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/black"
+    >
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/readtext"
+            android:paddingLeft="10dp"
+            android:paddingTop="10dp"
+            android:paddingRight="10dp"
+            android:textSize="20sp"
+            android:textColor="@android:color/white"
+            android:text="The location where the NewsArticle was produced.
+printColumn	Text 	The number of the column in which the NewsArticle appears in the print edition.
+printEdition	Text 	The edition of the print product in which the NewsArticle appears.
+printPage	Text 	If this NewsArticle appears in print, this field indicates the name of the page on which the article is found. Please note that this field is intended for the exact page name (e.g. A5, B18).
+printSection	Text 	If this NewsArticle appears in print, this field indicates the print section in which the article appeared.
+Properties from Article
+articleBody	Text 	The actual body of the article.
+articleSection	Text 	Articles may belong to one or more 'sections' in a magazine or newspaper, such as Sports, Lifestyle, etc.
+pageEnd	Integer  or
+Text 	The page on which the work ends; for example
+        pageStart	Integer  or
+        Text 	The page on which the work starts; for example
+        pagination	Text 	Any description of pages that is not separated into pageStart and pageEnd; for example
+        wordCount	Integer 	The number of words in the text of the Article."/>
+
+    </ScrollView>
+
+</LinearLayout>
