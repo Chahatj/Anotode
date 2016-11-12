@@ -5,13 +5,14 @@ package com.example.chahat.anotode;
  */
 public class User {
 
-    String username, email,password;
+    String username, email,password,picture_url;
 
-    public User(String username,String email,String password)
+    public User(String username,String email,String password,String picture)
     {
         this.username = username;
         this.email = email;
         this.password = password;
+        this.picture_url = picture;
     }
 
     public User(String email,String password)

@@ -10,13 +10,13 @@
         android:layout_height="match_parent"
         android:layout_above="@+id/tv_title"
         android:layout_marginBottom="30dp"
-        android:background="@color/bg_screen3"
+        android:background="#2bcb86"
         >
 
         <ImageView
-            android:layout_width="wrap_content"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_discount"
+            android:src="@drawable/ic_youtube_searched_for_black_24dp"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             />

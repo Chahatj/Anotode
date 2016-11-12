@@ -2,6 +2,7 @@ package com.example.chahat.anotode;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
@@ -14,8 +15,11 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.koushikdutta.async.Util;
 
 public class WelcomeActivity extends AppCompatActivity {
 
@@ -28,6 +32,10 @@ public class WelcomeActivity extends AppCompatActivity {
     private Button btnSignup, btnLogin;
     TextView tv_anotode;
 
+    SharedPreferences sharedPreferences;
+
+  static   WelcomeActivity welcomeActivity;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,13 +43,42 @@ public class WelcomeActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_welcome);
 
+        welcomeActivity = this;
+
+        sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+
+        if (sharedPreferences.contains("hasLoggedin"))
+        {
+            if (sharedPreferences.getBoolean("hasLoggedin",false))
+            {
+                Intent intent = new Intent(this,AnotodeStore.class);
+                    intent.putExtra("AnotherActivity",123);
+
+                startActivity(intent);
+                finish();
+            }
+        }
+        else {
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putBoolean("hasLoggedin",false);
+            editor.apply();
+        }
+
+
+
+
+
+
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
 
             Window window = getWindow();
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-            window.setStatusBarColor(getResources().getColor(R.color.dot_light_screen1));
+            window.setStatusBarColor(getResources().getColor(R.color.bg_screen3));
 
         }
+
+
 
             tv_anotode = (TextView) findViewById(R.id.tv_anotode);
             viewPager = (ViewPager) findViewById(R.id.view_pager);
@@ -115,23 +152,41 @@ public class WelcomeActivity extends AppCompatActivity {
         public void onPageSelected(int position) {
             addBottomDots(position);
 
+            if (position==0)
+            {
+                tv_anotode.setBackgroundColor(getResources().getColor(R.color.bg_screen3));
+            }
+            else if (position==1)
+            {
+                tv_anotode.setBackgroundColor(getResources().getColor(R.color.bg_screen2));
+            }
+            else if (position==2)
+            {
+                tv_anotode.setBackgroundColor(getResources().getColor(R.color.bg_screen1));
+            }
+            else if (position==3)
+            {
+                tv_anotode.setBackgroundColor(getResources().getColor(R.color.bg_screen4));
+            }
+
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
 
                 Window window = getWindow();
                 window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
 
                 if (position == 0) {
-                    window.setStatusBarColor(getResources().getColor(R.color.dot_light_screen1));
-                    tv_anotode.setBackgroundColor(getResources().getColor(R.color.bg_screen1));
+                    window.setStatusBarColor(getResources().getColor(R.color.bg_screen3));
+
+
                 } else if (position == 1) {
-                    window.setStatusBarColor(getResources().getColor(R.color.dot_light_screen2));
-                    tv_anotode.setBackgroundColor(getResources().getColor(R.color.bg_screen2));
+                    window.setStatusBarColor(getResources().getColor(R.color.bg_screen2));
+
                 } else if (position == 2) {
-                    window.setStatusBarColor(getResources().getColor(R.color.dot_light_screen3));
-                    tv_anotode.setBackgroundColor(getResources().getColor(R.color.bg_screen3));
+                    window.setStatusBarColor(getResources().getColor(R.color.bg_screen1));
+
                 } else if (position == 3) {
-                    window.setStatusBarColor(getResources().getColor(R.color.dot_light_screen4));
-                    tv_anotode.setBackgroundColor(getResources().getColor(R.color.bg_screen4));
+                    window.setStatusBarColor(getResources().getColor(R.color.bg_screen4));
+
                 }
 
             }
@@ -191,5 +246,10 @@ public class WelcomeActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+    }
+
+    public static WelcomeActivity getInstance()
+    {
+        return welcomeActivity;
     }
 }

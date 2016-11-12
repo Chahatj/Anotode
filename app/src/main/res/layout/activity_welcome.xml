@@ -10,11 +10,11 @@
         android:id="@+id/tv_anotode"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="anotode"
+        android:text="Anotode"
         android:textStyle="bold"
         android:textSize="30sp"
         android:textColor="@android:color/black"
-        android:background="@color/bg_screen1"/>
+        android:background="@color/bg_screen3"/>
 
 
         <android.support.v4.view.ViewPager
