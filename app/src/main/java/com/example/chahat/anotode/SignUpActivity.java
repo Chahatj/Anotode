@@ -9,6 +9,7 @@ import android.graphics.BitmapFactory;
 import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -34,6 +35,17 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.auth.api.signin.GoogleSignInResult;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.SignInButton;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.common.api.Status;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
 import com.koushikdutta.ion.ProgressCallback;
@@ -50,7 +62,14 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-public class SignUpActivity extends AppCompatActivity {
+public class SignUpActivity extends AppCompatActivity implements  GoogleApiClient.OnConnectionFailedListener {
+
+    GoogleSignInOptions gso;
+
+    //google api client
+    GoogleApiClient mGoogleApiClient;
+    SignInButton signInButton;
+
 
     EditText et_username,et_email,et_password;
     Button bt_signup;
@@ -80,6 +99,26 @@ public class SignUpActivity extends AppCompatActivity {
 
         getSupportActionBar().setTitle("Signup");*/
 
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .requestIdToken("1036953527322-jpr9phlk6sd97jt6fdn00kd31ohhthi1.apps.googleusercontent.com") //by the web credential
+                .build();
+
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .enableAutoManage(this /* FragmentActivity */, this /* OnConnectionFailedListener */)
+                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
+                .build();
+
+
+        signInButton = (SignInButton) findViewById(R.id.google_button);
+
+        signInButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
+                startActivityForResult(signInIntent,2);
+            }
+        });
 
 
 
@@ -103,9 +142,6 @@ public class SignUpActivity extends AppCompatActivity {
 
             }
         });
-
-
-
 
         sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
 
@@ -157,7 +193,6 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
 
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -177,7 +212,6 @@ public class SignUpActivity extends AppCompatActivity {
             catch (IOException e) {
                 e.printStackTrace();
             }*/
-
             String[] filePathColumn = { MediaStore.Images.Media.DATA };
             Cursor cursor = getContentResolver().query(selectedImage,
                     filePathColumn, null, null, null);
@@ -205,7 +239,39 @@ public class SignUpActivity extends AppCompatActivity {
 
 
         }
+
+        else if (requestCode ==2) {
+            GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
+            handleSignInResult(result);
+        }
+
     }
+
+    private void handleSignInResult(GoogleSignInResult result) {
+      //  Log.d(TAG, "handleSignInResult:" + result.isSuccess());
+        if (result.isSuccess()) {
+            // Signed in successfully, show authenticated UI.
+            GoogleSignInAccount acct = result.getSignInAccount();
+
+            picture_url = acct.getPhotoUrl().toString();
+
+            Log.d("idtoken", acct.getIdToken());
+
+            User user = new User(acct.getDisplayName(), acct.getEmail(), acct.getIdToken(),null);
+           registerUser(user);
+
+
+
+        } else {
+            // Signed out, show unauthenticated UI.
+           Log.d("error","errorrr");
+        }
+    }
+
+
+
+
+
 
    /* public Bitmap decodeFile(File f)
     {
@@ -338,7 +404,8 @@ public class SignUpActivity extends AppCompatActivity {
         return connectivityManager.getActiveNetworkInfo() != null && connectivityManager.getActiveNetworkInfo().isConnected();
     }
 
-   /* compile 'com.koushikdutta.ion:ion:2.+'
-    compile 'com.squareup.picasso:picasso:2.4.0'*/
+    @Override
+    public void onConnectionFailed(ConnectionResult connectionResult) {
 
+    }
 }

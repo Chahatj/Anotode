@@ -258,7 +258,12 @@ public class HighlightEdit extends AppCompatActivity {
 
             if (ettitle.getText().toString().isEmpty() || etcomment.getText().toString().isEmpty() || ettag1.getText().toString().isEmpty()||category.isEmpty())
             {
-                Toast.makeText(getApplicationContext(),"Fill empty fields",Toast.LENGTH_SHORT).show();
+                if (ettag1.getText().toString().isEmpty())
+                {
+                    Toast.makeText(getApplicationContext(),"Tag1 is required",Toast.LENGTH_SHORT).show();
+                }else{
+
+                Toast.makeText(getApplicationContext(),"Fill empty fields",Toast.LENGTH_SHORT).show();}
             }
             else {
 

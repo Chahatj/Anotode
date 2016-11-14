@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1036953527322",
+    "project_id": "anotode-149418"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1036953527322:android:d196108bb8565550",
+        "android_client_info": {
+          "package_name": "com.example.chahat.anotode"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1036953527322-ev6sr8eg6u3fc7vre673fbooqu6qnpqr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.chahat.anotode",
+            "certificate_hash": "BEEC00E9ED81A1E401950A04A3D4CDAE1FD1B1FB"
+          }
+        },
+        {
+          "client_id": "1036953527322-jpr9phlk6sd97jt6fdn00kd31ohhthi1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBGD6Za-5pKrDrAj1jqDj-53xmw5r6B5o0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -175,7 +175,7 @@ public class LogInActivity extends AppCompatActivity {
                             Toast.makeText(getApplicationContext(), "Slow network connection",
                                     Toast.LENGTH_SHORT).show();
                         } else if (error instanceof AuthFailureError) {
-                            Toast.makeText(getApplicationContext(), "You entered wrong password",
+                            Toast.makeText(getApplicationContext(), "You entered wrong password or wrong email",
                                     Toast.LENGTH_SHORT).show();
                         }
                         else {

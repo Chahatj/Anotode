@@ -96,6 +96,7 @@
                 android:layout_toRightOf="@+id/et_tag1"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="27dp"
+                android:hint="Optional"
                 android:layout_marginRight="10dp"
                 android:layout_alignBottom="@+id/icon_tag"
                 />
@@ -107,6 +108,7 @@
                 android:layout_below="@+id/et_tag1"
                 android:layout_alignLeft="@+id/et_tag1"
                 android:layout_marginTop="27dp"
+                android:hint="Optional"
                 android:layout_marginRight="10dp"
 
                 />
@@ -116,6 +118,7 @@
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/et_tag1"
+                android:hint="Optional"
                 android:layout_alignLeft="@+id/et_tag2"
                 android:layout_marginTop="27dp"
                 android:layout_marginRight="10dp"

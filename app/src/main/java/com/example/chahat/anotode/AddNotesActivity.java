@@ -284,9 +284,14 @@ public class AddNotesActivity extends AppCompatActivity {
                 category = etcategory.getText().toString();
             }
 
-            if (title.getText().toString().isEmpty() || notes.getText().toString().isEmpty() || tag1.getText().toString().isEmpty() || category.isEmpty())
+            if (title.getText().toString().isEmpty() || notes.getText().toString().isEmpty() || (tag1.getText().toString().isEmpty()) || category.isEmpty())
             {
-                Toast.makeText(getApplicationContext(),"Fill empty fields",Toast.LENGTH_SHORT).show();
+                if (tag1.getText().toString().isEmpty())
+                {
+                    Toast.makeText(getApplicationContext(),"Tag1 is required",Toast.LENGTH_SHORT).show();
+                }else{
+
+                Toast.makeText(getApplicationContext(),"Fill empty fields",Toast.LENGTH_SHORT).show();}
             }
             else {
 
