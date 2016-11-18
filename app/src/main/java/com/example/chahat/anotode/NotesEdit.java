@@ -116,13 +116,32 @@ public class NotesEdit extends AppCompatActivity {
 
         tvtime.setText(time);
 
-        ettitle.setText(title);
-        etnotedtext.setText(notedtext);
-        ettag1.setText(tag1);
-        ettag2.setText(tag2);
-        ettag3.setText(tag3);
-        ettag4.setText(tag4);
+        if (!(title.equals("notitle")))
+        {
+            ettitle.setText(title);
+        }
 
+        etnotedtext.setText(notedtext);
+
+        if (!(tag1.equals("notag1")))
+        {
+            ettag1.setText(tag1);
+        }
+
+        if (!(tag2.equals("notag2")))
+        {
+            ettag2.setText(tag2);
+        }
+
+        if (!(tag3.equals("notag3")))
+        {
+            ettag3.setText(tag3);
+        }
+
+        if (!(tag4.equals("notag4")))
+        {
+            ettag4.setText(tag4);
+        }
 
         categories = new ArrayList<String>();
         categories.add("Others");
@@ -241,19 +260,21 @@ public class NotesEdit extends AppCompatActivity {
         {
             if (category.equals("Others"))
             {
-                category = etcategory.getText().toString();
+                if (etcategory.getText().toString().isEmpty())
+                {
+                    category = "nocategory";
+                }
+                else {
+                    category = etcategory.getText().toString();
+                }
+
             }
 
 
-            if (ettitle.getText().toString().isEmpty() || etnotedtext.getText().toString().isEmpty() || ettag1.getText().toString()
-                    .isEmpty()|| category.isEmpty())
+            if (etnotedtext.getText().toString().isEmpty())
             {
-                if (ettag1.getText().toString().isEmpty())
-                {
-                    Toast.makeText(getApplicationContext(),"Tag1 is required",Toast.LENGTH_SHORT).show();
-                }else{
 
-                Toast.makeText(getApplicationContext(),"Fill empty fields",Toast.LENGTH_SHORT).show();}
+                Toast.makeText(getApplicationContext(),"Fill Notes",Toast.LENGTH_SHORT).show();
             }
             else {
 
@@ -325,25 +346,81 @@ public class NotesEdit extends AppCompatActivity {
 
         };*/
 
+        title = ettitle.getText().toString();
+        tag1 = ettag1.getText().toString();
+        tag2 = ettag2.getText().toString();
+        tag3 = ettag3.getText().toString();
+        tag4  = ettag4.getText().toString();
+
         ArrayList<String> numbers = new ArrayList<String>();
 
-        numbers.add(ettag1.getText().toString());
-        numbers.add(ettag2.getText().toString());
-        numbers.add(ettag3.getText().toString());
-        numbers.add(ettag4.getText().toString());
+        if (!(tag1.isEmpty()))
+        {
+            numbers.add(tag1);
+        }
+        else {
+            tag1 = "notag1";
+        }
+
+        if (!(tag2.isEmpty()))
+        {
+            numbers.add(tag2);
+        }
+        else {
+            tag2 = "notag2";
+        }
+
+        if (!(tag3.isEmpty()))
+        {
+            numbers.add(tag3);
+        }
+        else {
+            tag3 = "notag3";
+        }
+
+        if (!(tag4.isEmpty()))
+        {
+            numbers.add(tag4);
+        }
+        else {
+            tag4 = "notag4";
+        }
 
         JSONObject params = new JSONObject();
 
         try {
 
-            params.put("title", ettitle.getText().toString());
+            if (!(title.isEmpty()))
+            {
+                params.put("title", ettitle.getText().toString());
+            }
+            else {
+                title = "notitle";
+            }
+
             params.put("text",etnotedtext.getText().toString());
-            params.put("category",category);
+
+            if (!(category.equals("nocategory")))
+            {
+                params.put("category",category);
+            }
+
 
             Log.v("param",params+"");
 
-            JSONArray jsArray = new JSONArray(numbers);
-            params.put("tags", jsArray);
+            if (!(numbers.isEmpty()))
+            {
+                JSONArray jsArray = new JSONArray(numbers);
+                params.put("tags", jsArray);
+            }
+            else {
+                tag1 = "notag1";
+                tag2 = "notag2";
+                tag3 = "notag3";
+                tag4 = "notag4";
+            }
+
+
 
             Log.v("param", params + "");
         }
@@ -359,11 +436,13 @@ public class NotesEdit extends AppCompatActivity {
                     @Override
                     public void onResponse(JSONObject response) {
 
-                        dh.updateNotes(id,ettitle.getText().toString(),etnotedtext.getText().toString(),comment,ettag1.getText().toString(),ettag2.getText().toString(),ettag3.getText().toString(),ettag4.getText().toString(),category);
+                        Log.v("tag",tag1+" "+tag2+" "+tag3+" "+tag4);
+
+                        dh.updateNotes(id,title,etnotedtext.getText().toString(),comment,tag1,tag2,tag3,tag4,category);
 
                         Intent intent = new Intent(getApplicationContext(),note_detail.class);
                         intent.putExtra("updatenotechecking",789);
-                        intent.putExtra("stringss",new String[] {ettitle.getText().toString(),etnotedtext.getText().toString(),ettag1.getText().toString(),ettag2.getText().toString(),ettag3.getText().toString(),ettag4.getText().toString(),category,id,time,url,comment});
+                        intent.putExtra("stringss",new String[] {title,etnotedtext.getText().toString(),tag1,tag2,tag3,tag4,category,id,time,url,comment});
                         startActivity(intent);
                         finish();
 

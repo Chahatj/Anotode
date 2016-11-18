@@ -83,5 +83,15 @@ android:background="@drawable/login"
         android:layout_below="@+id/input_layout_password"
         android:layout_alignStart="@+id/input_layout_password"/>
 
+    <TextView
+        android:id="@+id/forgot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Forgot password"
+        android:layout_below="@+id/btn_login"
+        android:layout_alignLeft="@+id/btn_login"
+        android:textColor="@android:color/black"
+        android:layout_marginTop="10dp"/>
+
 
 </RelativeLayout>

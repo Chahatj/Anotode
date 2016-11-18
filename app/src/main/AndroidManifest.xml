@@ -68,7 +68,8 @@
                 android:name="android.app.searchable"
                 android:resource="@layout/searchable" />
         </activity>
-        <activity android:name=".ChangeProfileActivity"></activity>
+        <activity android:name=".ChangeProfileActivity" />
+        <activity android:name=".ForgotActivity"></activity>
     </application>
 
 </manifest>

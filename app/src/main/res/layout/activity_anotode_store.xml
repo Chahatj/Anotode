@@ -20,6 +20,8 @@
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/nav_header_anotode_store"
-        app:menu="@menu/activity_anotode_store_drawer" />
+        app:menu="@menu/activity_anotode_store_drawer"
+
+    />
 
 </android.support.v4.widget.DrawerLayout>

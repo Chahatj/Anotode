@@ -19,6 +19,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,6 +37,8 @@ public class note_detail extends AppCompatActivity {
 
     TextView tv_title,tv_notedetail;
     Button bt_tag1,bt_tag2,bt_tag3,bt_tag4,bt_category;
+
+    ImageView categoryicon,tagicon;
 
     Dialog dialog;
     String[] myStrings=new String[]{null,null,null,null,null,null,null,null,null,null,null};
@@ -68,6 +71,9 @@ public class note_detail extends AppCompatActivity {
         bt_tag2= (Button) findViewById(R.id.tag_button2);
         bt_tag3= (Button) findViewById(R.id.tag_button3);
         bt_tag4= (Button) findViewById(R.id.tag_button4);
+
+        categoryicon = (ImageView) findViewById(R.id.category_icon);
+        tagicon = (ImageView) findViewById(R.id.tag_icon);
 
         bt_category = (Button) findViewById(R.id.category_button);
 
@@ -110,35 +116,64 @@ public class note_detail extends AppCompatActivity {
         getSupportActionBar().setTitle(time);
 
         tv_title.setText(title);
-        bt_tag1.setText(tag1);
 
-        if (tag2.isEmpty())
+        if (tag1.equals("notag1"))
+        {
+            bt_tag1.setVisibility(View.GONE);
+
+        }
+        else {
+            bt_tag1.setText(tag1);
+
+        }
+
+
+        if (tag2.equals("notag2"))
         {
             bt_tag2.setVisibility(View.GONE);
+
         }
         else {
             bt_tag2.setVisibility(View.VISIBLE);
             bt_tag2.setText(tag2);
+
         }
-        if (tag3.isEmpty())
+        if (tag3.equals("notag3"))
         {
             bt_tag3.setVisibility(View.GONE);
+
         }
         else {
             bt_tag3.setVisibility(View.VISIBLE);
             bt_tag3.setText(tag3);
+
         }
-        if (tag4.isEmpty())
+        if (tag4.equals("notag4"))
         {
             bt_tag4.setVisibility(View.GONE);
+
         }
         else {
             bt_tag4.setVisibility(View.VISIBLE);
             bt_tag4.setText(tag4);
+
         }
 
+        if (tag1.equals("notag1")&&tag2.equals("notag2")&&tag3.equals("notag3")&&tag4.equals("notag4"))
+        {
+            tagicon.setVisibility(View.GONE);
+        }
 
-        bt_category.setText(category);
+        if (category.equals("nocategory"))
+        {
+            bt_category.setVisibility(View.GONE);
+            categoryicon.setVisibility(View.GONE);
+
+        }
+        else {
+            bt_category.setText(category);
+        }
+
 
         tv_notedetail.setOnClickListener(new View.OnClickListener() {
             @Override

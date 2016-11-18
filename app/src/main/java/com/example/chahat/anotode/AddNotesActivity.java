@@ -281,18 +281,20 @@ public class AddNotesActivity extends AppCompatActivity {
         {
             if (category.equals("Others"))
             {
-                category = etcategory.getText().toString();
-            }
-
-            if (title.getText().toString().isEmpty() || notes.getText().toString().isEmpty() || (tag1.getText().toString().isEmpty()) || category.isEmpty())
-            {
-                if (tag1.getText().toString().isEmpty())
+                if (etcategory.getText().toString().isEmpty())
                 {
-                    Toast.makeText(getApplicationContext(),"Tag1 is required",Toast.LENGTH_SHORT).show();
-                }else{
+                    category = "nocategory";
+                }
+                else{
+                    category = etcategory.getText().toString();
+                }
 
-                Toast.makeText(getApplicationContext(),"Fill empty fields",Toast.LENGTH_SHORT).show();}
             }
+
+            if (notes.getText().toString().isEmpty())
+            {
+                Toast.makeText(getApplicationContext(),"Fill Notes",Toast.LENGTH_SHORT).show();}
+
             else {
 
                 if (isNetworkAvailable(getApplicationContext())) {
@@ -315,12 +317,47 @@ public class AddNotesActivity extends AppCompatActivity {
 
     private void save_send_Notes() {
 
-        tit = title.getText().toString();
+        if (title.getText().toString().isEmpty())
+        {
+            tit = "notitle";
+        }
+        else {
+            tit = title.getText().toString();
+        }
+
+
         not = notes.getText().toString();
-        ta = tag1.getText().toString();
-        ta2 = tag2.getText().toString();
-        ta3 = tag3.getText().toString();
-        ta4 = tag4.getText().toString();
+
+       if (tag1.getText().toString().isEmpty())
+       {
+           ta = "notag1";
+       }
+        else {
+           ta = tag1.getText().toString();
+       }
+        if (tag2.getText().toString().isEmpty())
+        {
+            ta2 = "notag2";
+        }
+        else {
+            ta2 = tag2.getText().toString();
+        }
+        if (tag3.getText().toString().isEmpty())
+        {
+            ta3 = "notag3";
+        }
+        else {
+            ta3 = tag3.getText().toString();
+        }
+        if (tag4.getText().toString().isEmpty())
+        {
+            ta4 = "notag4";
+        }
+        else {
+            ta4 = tag4.getText().toString();
+        }
+
+
 
 
 
@@ -333,19 +370,21 @@ public class AddNotesActivity extends AppCompatActivity {
 
         ArrayList<String> numbers = new ArrayList<String>();
 
-        numbers.add(highlight.getTag1());
+        if (!(ta.equals("notag1"))) {
+            numbers.add(highlight.getTag1());
+        }
 
-        if (!(ta2.isEmpty()))
+        if (!(ta2.equals("notag2")))
         {
             numbers.add(highlight.getTag2());
         }
 
-        if (!(ta3.isEmpty()))
+        if (!(ta3.equals("notag3")))
         {
             numbers.add(highlight.getTag3());
         }
 
-        if (!(ta4.isEmpty()))
+        if (!(ta4.equals("notag4")))
         {
             numbers.add(highlight.getTag4());
         }
@@ -357,14 +396,26 @@ public class AddNotesActivity extends AppCompatActivity {
         try {
 
             params.put("url", "customNote");
-            params.put("title", highlight.getTitle());
+            if (!(highlight.getTitle().equals("notitle")))
+            {
+                params.put("title", highlight.getTitle());
+            }
+
             params.put("text", highlight.getNotedtext());
-            params.put("category", highlight.getCategory());
-            params.put("comment", highlight.getComment());
+
+           if (!(highlight.getCategory().equals("nocategory")))
+           {
+               params.put("category", highlight.getCategory());
+           }
+
+            if (!(numbers.isEmpty()))
+            {
+                JSONArray jsArray = new JSONArray(numbers);
+                params.put("tags", jsArray);
+            }
 
 
-            JSONArray jsArray = new JSONArray(numbers);
-            params.put("tags", jsArray);
+
 
             Log.v("param", params + "");
         }

@@ -29,6 +29,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -134,10 +135,24 @@ public class SignUpActivity extends AppCompatActivity implements  GoogleApiClien
             @Override
             public void onClick(View v) {
 
-             Intent   intent = new Intent(Intent.ACTION_PICK,
-                        android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                if (isNetworkAvailable(getApplicationContext()))
+                {
+                    Intent   intent = new Intent(Intent.ACTION_PICK,
+                            android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
 
-                startActivityForResult(intent, 1);
+                    startActivityForResult(intent, 1);
+                }
+                else {
+                    snackbar.make(findViewById(android.R.id.content), "Image can't upload", Snackbar.LENGTH_LONG)
+                            .setAction("No Internet Connection", new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    Log.d("snackbar", "snackbar clicked");
+                                }
+                            }).show();
+                }
+
+
 
 
             }
@@ -160,21 +175,23 @@ public class SignUpActivity extends AppCompatActivity implements  GoogleApiClien
     }
     else
     {
-        if (isNetworkAvailable(getApplicationContext()))
-        {
+        if (android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            if (isNetworkAvailable(getApplicationContext())) {
 
-            User user = new User(username,email, password,picture_url);
-            registerUser(user);
+                User user = new User(username, email, password, picture_url);
+                registerUser(user);
+            } else {
+                snackbar.make(findViewById(android.R.id.content), "No Internet Connection", Snackbar.LENGTH_LONG)
+                        .setAction("No Internet Connection", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                Log.d("snackbar", "snackbar clicked");
+                            }
+                        }).show();
+            }
         }
-        else
-        {
-            snackbar.make(findViewById(android.R.id.content),"No Internet Connection", Snackbar.LENGTH_LONG)
-                    .setAction("No Internet Connection", new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            Log.d("snackbar","snackbar clicked");
-                        }
-                    }).show();
+        else {
+            Toast.makeText(getApplicationContext(),"Not a valid email",Toast.LENGTH_SHORT).show();
         }
 
 
@@ -233,8 +250,13 @@ public class SignUpActivity extends AppCompatActivity implements  GoogleApiClien
 
 
             if (f!=null){
-                progressBar.setVisibility(View.VISIBLE);
-                imagesend();}
+
+
+                    progressBar.setVisibility(View.VISIBLE);
+                    imagesend();
+
+
+                }
 
 
 
@@ -330,7 +352,25 @@ public class SignUpActivity extends AppCompatActivity implements  GoogleApiClien
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(getBaseContext(),"Slow internet connection...wait",Toast.LENGTH_LONG).show();
+
+                        NetworkResponse response = error.networkResponse;
+
+                        Log.v("res",response+"");
+
+                        if (response!=null)
+                        {
+                            if (response.statusCode==400)
+                            {
+                                Toast.makeText(getBaseContext(),"Email already used",Toast.LENGTH_LONG).show();
+                            }
+                            else{
+                                Toast.makeText(getBaseContext(),"Slow internet connection...wait",Toast.LENGTH_LONG).show();
+                            }
+                        }
+
+
+
+
                     }
                 }){
             @Override

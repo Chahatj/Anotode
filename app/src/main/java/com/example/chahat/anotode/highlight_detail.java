@@ -19,6 +19,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,6 +38,8 @@ public class highlight_detail extends AppCompatActivity {
 
     String id,time,url,title,notedtext,comment,tag1,tag2,tag3,tag4,category;
     Dialog dialog;
+
+    ImageView categoryicon,tagicon;
 
     NotesDataHandler dh;
     String[] myStrings=new String[]{null,null,null,null,null,null,null,null,null,null,null};
@@ -72,7 +75,8 @@ public class highlight_detail extends AppCompatActivity {
         bt_tag4 = (Button) findViewById(R.id.tag_button4);
         bt_category = (Button) findViewById(R.id.category_button);
 
-
+        categoryicon = (ImageView) findViewById(R.id.category_icon);
+        tagicon = (ImageView) findViewById(R.id.tag_icon);
 
         int i = getIntent().getExtras().getInt("updateChecking");
 
@@ -117,10 +121,19 @@ public class highlight_detail extends AppCompatActivity {
 
         tv_title.setText(title);
         tv_url.setText(url);
-        bt_tag1.setText(tag1);
+
+        if (tag1.equals("notag1"))
+        {
+          bt_tag1.setVisibility(View.GONE);
+        }
+        else
+        {
+            bt_tag1.setText(tag1);
+        }
 
 
-        if (tag2.isEmpty())
+
+        if (tag2.equals("notag2"))
         {
             bt_tag2.setVisibility(View.GONE);
         }
@@ -128,7 +141,7 @@ public class highlight_detail extends AppCompatActivity {
             bt_tag2.setVisibility(View.VISIBLE);
             bt_tag2.setText(tag2);
         }
-        if (tag3.isEmpty())
+        if (tag3.equals("notag3"))
         {
             bt_tag3.setVisibility(View.GONE);
         }
@@ -136,7 +149,7 @@ public class highlight_detail extends AppCompatActivity {
             bt_tag3.setVisibility(View.VISIBLE);
             bt_tag3.setText(tag3);
         }
-        if (tag4.isEmpty())
+        if (tag4.equals("notag4"))
         {
             bt_tag4.setVisibility(View.GONE);
         }
@@ -145,8 +158,21 @@ public class highlight_detail extends AppCompatActivity {
             bt_tag4.setText(tag4);
         }
 
+        if (tag1.equals("notag1")&&tag2.equals("notag2")&&tag3.equals("notag3")&&tag4.equals("notag4"))
+        {
+            tagicon.setVisibility(View.GONE);
+        }
 
-        bt_category.setText(category);
+
+        if (category.equals("nocategory"))
+        {
+            bt_category.setVisibility(View.GONE);
+            categoryicon.setVisibility(View.GONE);
+        }
+        else{
+            bt_category.setText(category);
+        }
+
 
         tv_highlightdetail.setOnClickListener(new View.OnClickListener() {
             @Override

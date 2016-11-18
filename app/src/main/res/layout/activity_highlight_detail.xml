@@ -30,20 +30,22 @@
         />
 
 
-
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="url"
         android:id="@+id/detail_url"
-        android:layout_below="@+id/detail_title"
         android:layout_marginTop="15dp"
         android:layout_marginLeft="10dp"
+        android:layout_below="@+id/detail_title"
         android:layout_alignParentStart="true"
         android:textColor="@android:color/black"
         android:textSize="15sp"/>
 
-        <ImageView
+
+
+
+    <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/tag"
@@ -53,14 +55,19 @@
             android:layout_marginLeft="10dp"
             />
 
+    <RelativeLayout
+        android:id="@+id/rr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/detail_url"
+        android:layout_toRightOf="@+id/tag_icon">
+
     <Button
         android:id="@+id/tag_button1"
         android:layout_width="wrap_content"
         android:layout_height="42dp"
         android:text="tag"
         android:enabled="false"
-        android:layout_toRightOf="@+id/tag_icon"
-        android:layout_below="@+id/detail_url"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="10dp"
         android:background="@drawable/round"
@@ -75,7 +82,6 @@
         android:text="tag"
         android:enabled="false"
         android:layout_toRightOf="@+id/tag_button1"
-        android:layout_below="@+id/detail_url"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="10dp"
         android:background="@drawable/roundtag2"
@@ -90,7 +96,6 @@
         android:text="tag"
         android:enabled="false"
         android:layout_toRightOf="@+id/tag_button2"
-        android:layout_below="@+id/detail_url"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="10dp"
         android:background="@drawable/roundtag3"
@@ -98,26 +103,44 @@
         android:textStyle="bold"
         />
 
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rrr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rr"
+        android:layout_toRightOf="@+id/tag_icon"
+        android:layout_marginLeft="20dp"
+        >
+
     <Button
         android:id="@+id/tag_button4"
         android:layout_width="wrap_content"
         android:layout_height="42dp"
         android:text="tag"
         android:enabled="false"
-        android:layout_alignLeft="@+id/tag_button1"
-        android:layout_below="@+id/tag_button1"
         android:layout_marginTop="10dp"
         android:background="@drawable/roundtag4"
         android:textColor="@android:color/white"
         android:textStyle="bold"
         />
 
+    </RelativeLayout>
+
+
+
+    <RelativeLayout
+        android:id="@+id/rrrr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rrr">
+
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/category"
         android:id="@+id/category_icon"
-        android:layout_below="@+id/tag_button4"
         android:layout_marginTop="20dp"
         android:layout_marginLeft="10dp"
         />
@@ -129,9 +152,8 @@
         android:text="category"
         android:enabled="false"
         android:layout_toRightOf="@+id/category_icon"
-        android:layout_below="@+id/tag_button4"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="15dp"
+        android:layout_alignBottom="@+id/category_icon"
         android:paddingLeft="5dp"
         android:paddingRight="5dp"
         android:background="@drawable/roundcategory"
@@ -139,11 +161,17 @@
         android:textStyle="bold"
         />
 
+</RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rrrr">
+
     <View
         android:id="@+id/view"
         android:layout_width="match_parent"
         android:layout_height="2dp"
-        android:layout_below="@+id/category_button"
         android:layout_marginTop="10dp"
         android:background="@android:color/black"/>
 
@@ -218,6 +246,8 @@
         android:layout_marginTop="23dp"
         android:layout_toRightOf="@+id/tv_highlight"
         android:layout_marginLeft="100dp"/>
+
+    </RelativeLayout>
 
     <android.support.design.widget.FloatingActionButton
         android:layout_width="wrap_content"

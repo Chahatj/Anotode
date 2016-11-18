@@ -212,63 +212,89 @@ public class NotesFragment extends Fragment implements SwipeRefreshLayout.OnRefr
                                     id = jsonObject.getString("_id");
                                     String time = jsonObject.getString("time");
                                     String url = jsonObject.getString("url");
-                                    String title = jsonObject.getString("title");
-                                    String notedtext = jsonObject.getString("text");
-                                    String comment = jsonObject.getString("comment");
-                                    String category = jsonObject.getString("category");
 
-                                    JSONArray tagsArray = jsonObject.getJSONArray("tags");
+                                    String title,comment,category,tag1;
 
-
-
-                                    for (int j=0;j<tagsArray.length();j++)
+                                    if (jsonObject.has("title"))
                                     {
-                                       String  tag = tagsArray.getString(j);
-
-                                       taglist.add(tag);
-
-                                        Log.d("tag",tag);
+                                        title = jsonObject.getString("title");
                                     }
-
-                                    String tag1 = taglist.get(0);
-
-                            Log.d("tagsize",taglist.size()+"");
-
-                                    if (taglist.size()==2){
-
-                                    tag2 = taglist.get(1);
-
-                                        tag3="";
-                                        tag4="";
-
-                                        Log.d("in2",tag1+tag2+tag3+tag4);
-
-                                    }
-                                    else if (taglist.size()==3)
-                                    {
-                                        tag2 = taglist.get(1);
-                                        tag3 = taglist.get(2);
-
-                                        tag4="";
-
-                                        Log.d("in3",tag1+tag2+tag3+tag4);
-                                    }
-                                    else if(taglist.size()==4)
-                                    {
-                                        tag2 = taglist.get(1);
-                                        tag3 = taglist.get(2);
-                                        tag4 = taglist.get(3);
-
-                                        Log.d("in4",tag1+tag2+tag3+tag4);
-                                    }
-
                                     else {
-                                        tag2=  "";
-                                        tag3 = "";
-                                        tag4 = "";
+                                        title = "notitle";
                                     }
 
-                                    taglist.clear();
+                                    String notedtext = jsonObject.getString("text");
+
+                                    if (jsonObject.has("comment"))
+                                    {
+                                        comment = jsonObject.getString("comment");
+                                    }
+                                    else {
+                                        comment = "nocomment";
+                                    }
+
+                                    if (jsonObject.has("category"))
+                                    {
+                                        category = jsonObject.getString("category");
+                                    }
+                                    else {
+                                        category = "nocategory";
+                                    }
+
+                                  if (jsonObject.has("tags")&&jsonObject.getJSONArray("tags").length()!=0) {
+
+                                      JSONArray tagsArray = jsonObject.getJSONArray("tags");
+
+
+                                      for (int j = 0; j < tagsArray.length(); j++) {
+                                          String tag = tagsArray.getString(j);
+
+                                          taglist.add(tag);
+
+                                          Log.d("tag", tag);
+                                      }
+
+                                    tag1 = taglist.get(0);
+
+                                      Log.d("tagsize", taglist.size() + "");
+
+                                      if (taglist.size() == 2) {
+
+                                          tag2 = taglist.get(1);
+
+                                          tag3 = "notag3";
+                                          tag4 = "notag4";
+
+                                          Log.d("in2", tag1 + tag2 + tag3 + tag4);
+
+                                      } else if (taglist.size() == 3) {
+                                          tag2 = taglist.get(1);
+                                          tag3 = taglist.get(2);
+
+                                          tag4 = "notag4";
+
+                                          Log.d("in3", tag1 + tag2 + tag3 + tag4);
+                                      } else if (taglist.size() == 4) {
+                                          tag2 = taglist.get(1);
+                                          tag3 = taglist.get(2);
+                                          tag4 = taglist.get(3);
+
+                                          Log.d("in4", tag1 + tag2 + tag3 + tag4);
+                                      } else {
+                                          tag2 = "notag2";
+                                          tag3 = "notag3";
+                                          tag4 = "notag4";
+                                      }
+
+                                      taglist.clear();
+
+                                  }
+                                    else {
+                                      tag1 = "notag1";
+                                      tag2 = "notag2";
+                                      tag3 = "notag3";
+                                      tag4 = "notag4";
+                                  }
 
 
 

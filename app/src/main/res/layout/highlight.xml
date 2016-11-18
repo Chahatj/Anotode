@@ -85,6 +85,11 @@
                 android:layout_marginLeft="3dp"
                 android:layout_toRightOf="@+id/icon_title"/>
 
+            <RelativeLayout
+                android:id="@+id/rr"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_highlight">
 
             <Button
                 android:id="@+id/bt_tag1"
@@ -93,7 +98,6 @@
                 android:text="tag"
                 android:textColor="@android:color/white"
                 android:textStyle="bold"
-                android:layout_below="@+id/tv_highlight"
                 android:layout_marginLeft="3dp"
                 android:layout_marginTop="10dp"
                 android:enabled="false"
@@ -107,7 +111,6 @@
                 android:text="tag"
                 android:textColor="@android:color/white"
                 android:textStyle="bold"
-                android:layout_below="@+id/tv_highlight"
                 android:layout_toRightOf="@+id/bt_tag1"
                 android:layout_marginLeft="3dp"
                 android:layout_marginTop="10dp"
@@ -122,7 +125,6 @@
                 android:text="tag"
                 android:textColor="@android:color/white"
                 android:textStyle="bold"
-                android:layout_below="@+id/tv_highlight"
                 android:layout_toRightOf="@+id/bt_tag2"
                 android:layout_marginLeft="3dp"
                 android:layout_marginTop="10dp"
@@ -137,7 +139,6 @@
                 android:text="tag"
                 android:textColor="@android:color/white"
                 android:textStyle="bold"
-                android:layout_below="@+id/tv_highlight"
                 android:layout_toRightOf="@+id/bt_tag3"
                 android:layout_marginLeft="3dp"
                 android:layout_marginTop="10dp"
@@ -145,17 +146,18 @@
                 android:background="@drawable/roundtag4"
                 />
 
+            </RelativeLayout>
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Read More"
+                android:text="Read More>>"
                 android:id="@+id/tv_readmore"
                 android:textStyle="bold"
-                android:layout_below="@+id/bt_tag1"
-                android:layout_toRightOf="@+id/bt_category"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginBottom="10dp"
+                android:layout_alignParentEnd="true"
+                android:layout_below="@+id/bt_category"
+                android:layout_marginBottom="30dp"
+                android:layout_marginRight="20dp"
                 />
 
             <Button
@@ -165,8 +167,8 @@
                 android:text="category"
                 android:textColor="@android:color/white"
                 android:textStyle="bold"
-                android:layout_alignLeft="@+id/bt_tag1"
-                android:layout_below="@+id/bt_tag1"
+                android:layout_alignLeft="@+id/icon_note"
+                android:layout_below="@+id/rr"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="15dp"
                 android:enabled="false"

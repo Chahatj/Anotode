@@ -12,4 +12,13 @@
             android:title="Notes" />
     </group>
 
+    <group>
+            <item
+                android:id="@+id/nav_download"
+                android:title="Download"
+                android:icon="@drawable/ic_get_app_black_24dp"
+                />
+
+    </group>
+
 </menu>

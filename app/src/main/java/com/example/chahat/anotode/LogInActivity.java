@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -43,6 +44,7 @@ public class LogInActivity extends AppCompatActivity {
     String SERVER_ADDRESS = "http://anotode.herokuapp.com/api/login";
     SharedPreferences sharedPreferences;
     Snackbar snackbar;
+    TextView forgot;
 
 
 
@@ -61,6 +63,16 @@ public class LogInActivity extends AppCompatActivity {
         et_email = (EditText) findViewById(R.id.input_email);
         et_password = (EditText) findViewById(R.id.input_password);
         bt_login = (Button) findViewById(R.id.btn_login);
+        forgot = (TextView) findViewById(R.id.forgot);
+
+        forgot.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(getApplicationContext(),ForgotActivity.class);
+                startActivity(intent);
+            }
+        });
 
 
         bt_login.setOnClickListener(new View.OnClickListener() {
@@ -74,33 +86,39 @@ public class LogInActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Fill empty fields", Toast.LENGTH_SHORT).show();
                 } else {
 
-                    User user = new User(email, password);
+                    if (android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
 
-                    if (isNetworkAvailable(getApplicationContext())) {
+                        User user = new User(email, password);
 
-                        Log.d("connect", "connected");
-                        loginUser(user);
+                        if (isNetworkAvailable(getApplicationContext())) {
 
-                    } else {
-                        try {
-                            //To hide keyBoard
+                            Log.d("connect", "connected");
+                            loginUser(user);
 
-                            InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
-                            imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
-                        } catch (Exception e) {
-                            // TODO: handle exception
+                        } else {
+                            try {
+                                //To hide keyBoard
+
+                                InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+                                imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+                            } catch (Exception e) {
+                                // TODO: handle exception
+                            }
+                            Log.d("disconnect", "disconnected");
+
+
+                            snackbar.make(findViewById(android.R.id.content), "No Internet Connection", Snackbar.LENGTH_LONG)
+                                    .setAction("No Internet Connection", new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+                                            Log.d("snackbar", "snackbar clicked");
+                                        }
+                                    }).show();
+
                         }
-                        Log.d("disconnect", "disconnected");
-
-
-                        snackbar.make(findViewById(android.R.id.content), "No Internet Connection", Snackbar.LENGTH_LONG)
-                                .setAction("No Internet Connection", new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View view) {
-                                        Log.d("snackbar", "snackbar clicked");
-                                    }
-                                }).show();
-
+                    }
+                    else{
+                        Toast.makeText(getApplicationContext(),"Not a valid email",Toast.LENGTH_SHORT).show();
                     }
 
 
@@ -179,7 +197,7 @@ public class LogInActivity extends AppCompatActivity {
                                     Toast.LENGTH_SHORT).show();
                         }
                         else {
-                            Toast.makeText(getApplicationContext(),"wrong password or slow network connection",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(),"You entered wrong password or wrong email",Toast.LENGTH_SHORT).show();
                         }
 
                     }

@@ -48,7 +48,7 @@ public class SearchResultActivity extends AppCompatActivity {
 
     SharedPreferences sharedPreferences;
 
-    String tag2,tag3,tag4;
+    String tag,tag2,tag3,tag4;
 
     String SERVER_ADDRESS = "http://anotode.herokuapp.com/api/highlights?token=";
 
@@ -199,66 +199,80 @@ public class SearchResultActivity extends AppCompatActivity {
                                     String id = jsonObject.getString("_id");
                                     String time = jsonObject.getString("time");
                                     String url = jsonObject.getString("url");
-                                    String title = jsonObject.getString("title");
+
+                                String title,comment,category,tag1;
+
+                                if(jsonObject.has("title")){
+                                    title = jsonObject.getString("title");
+                                }
+                                else {
+                                    title = "notitle";
+                                }
+
+                                if (jsonObject.has("comment"))
+                                {
+                                    comment = jsonObject.getString("comment");
+                                }
+                                else {
+                                    comment = "nocomment";
+                                }
+
                                     String notedtext = jsonObject.getString("text");
-                                    String comment = jsonObject.getString("comment");
-                                    String category = jsonObject.getString("category");
+
+                                if (jsonObject.has("category"))
+                                {
+                                    category = jsonObject.getString("category");
+                                }
+                                else {
+                                    category= "nocategory";
+                                }
+
+
+                                if (jsonObject.has("tags")&& jsonObject.getJSONArray("tags").length()!=0) {
 
                                     JSONArray tagsArray = jsonObject.getJSONArray("tags");
 
-
-
-                                    for (int j=0;j<tagsArray.length();j++)
-                                    {
-                                        String  tag = tagsArray.getString(j);
+                                    for (int j = 0; j < tagsArray.length(); j++) {
+                                        tag = tagsArray.getString(j);
 
                                         taglist.add(tag);
 
-                                        Log.d("tag",tag);
+                                        Log.d("tag", tag);
                                     }
 
-                                    String tag1 = taglist.get(0);
+                                    tag1 = taglist.get(0);
 
-                                    Log.d("tagsize",taglist.size()+"");
 
-                                    if (taglist.size()==2){
+                                    if (taglist.size() == 2) {
 
                                         tag2 = taglist.get(1);
+                                        tag3 = "notag3";
+                                        tag4 = "notag4";
 
-                                        tag3="";
-                                        tag4="";
-
-                                        Log.d("in2",tag1+tag2+tag3+tag4);
-
-                                    }
-                                    else if (taglist.size()==3)
-                                    {
+                                    } else if (taglist.size() == 3) {
                                         tag2 = taglist.get(1);
                                         tag3 = taglist.get(2);
+                                        tag4 = "notag4";
 
-                                        tag4="";
-
-                                        Log.d("in3",tag1+tag2+tag3+tag4);
-                                    }
-                                    else if(taglist.size()==4)
-                                    {
+                                    } else if (taglist.size() == 4) {
                                         tag2 = taglist.get(1);
                                         tag3 = taglist.get(2);
                                         tag4 = taglist.get(3);
-
-                                        Log.d("in4",tag1+tag2+tag3+tag4);
-                                    }
-
-                                    else {
-                                        tag2=  "";
-                                        tag3 = "";
-                                        tag4 = "";
+                                    } else {
+                                        tag2 = "notag2";
+                                        tag3 = "notag3";
+                                        tag4 = "notag4";
                                     }
 
                                     taglist.clear();
 
-
-
+                                }
+                                else {
+                                    tag1 = "notag1";
+                                    tag2 = "notag2";
+                                    tag3 = "notag3";
+                                    tag4 = "notag4";
+                                }
 
                                     Log.d("time", time);
 

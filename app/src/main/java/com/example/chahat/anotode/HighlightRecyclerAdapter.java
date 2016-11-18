@@ -7,6 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -22,6 +24,7 @@ public class HighlightRecyclerAdapter extends RecyclerView.Adapter<HighlightRecy
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView time,url,title,highlightss,tv_readmore;
         public Button category, tag1,tag2,tag3,tag4;
+        public ImageView  icontitle;
 
 
 
@@ -38,6 +41,7 @@ public class HighlightRecyclerAdapter extends RecyclerView.Adapter<HighlightRecy
             highlightss= (TextView) view.findViewById(R.id.tv_highlight);
             category = (Button) view.findViewById(R.id.bt_category);
             tv_readmore = (TextView) view.findViewById(R.id.tv_readmore);
+            icontitle = (ImageView) view.findViewById(R.id.icon_title);
         }
     }
 
@@ -61,35 +65,67 @@ public class HighlightRecyclerAdapter extends RecyclerView.Adapter<HighlightRecy
         Highlight highlight = highlightList.get(position);
         holder.time.setText(highlight.getTime());
         holder.url.setText(highlight.getUrl());
-        holder.title.setText(highlight.getTitle());
-        holder.tag1.setText(highlight.getTag1());
-        if (!(highlight.getTag2().isEmpty()))
+
+        if (highlight.getTitle().equals("notitle"))
         {
+            holder.icontitle.setVisibility(View.GONE);
+            holder.title.setVisibility(View.GONE);
+        }
+        else {
+            holder.title.setVisibility(View.VISIBLE);
+            holder.title.setText(highlight.getTitle());
+            holder.icontitle.setVisibility(View.VISIBLE);
+        }
+
+        if (highlight.getTag1().equals("notag1"))
+        {
+            holder.tag1.setVisibility(View.GONE);
+        }
+        else{
+            holder.tag1.setVisibility(View.VISIBLE);
+            holder.tag1.setText(highlight.getTag1());
+        }
+
+        if (highlight.getTag2().equals("notag2"))
+        {
+            holder.tag2.setVisibility(View.GONE);
+        }
+        else{
             holder.tag2.setVisibility(View.VISIBLE);
             holder.tag2.setText(highlight.getTag2());
         }
-        else{
-            holder.tag2.setVisibility(View.GONE);
-        }
-        if (!(highlight.getTag3().isEmpty()))
+
+        if (highlight.getTag3().equals("notag3"))
         {
+            holder.tag3.setVisibility(View.GONE);
+        }
+        else{
             holder.tag3.setVisibility(View.VISIBLE);
             holder.tag3.setText(highlight.getTag3());
         }
-        else{
-            holder.tag3.setVisibility(View.GONE);
-        }
-        if (!(highlight.getTag4().isEmpty()))
+
+        if (highlight.getTag4().equals("notag4"))
         {
+            holder.tag4.setVisibility(View.GONE);
+        }
+        else{
             holder.tag4.setVisibility(View.VISIBLE);
             holder.tag4.setText(highlight.getTag4());
         }
-        else{
-            holder.tag4.setVisibility(View.GONE);
+
+
+        if (highlight.getCategory().equals("nocategory"))
+        {
+            holder.category.setVisibility(View.GONE);
+        }
+        else
+        {
+            holder.category.setVisibility(View.VISIBLE);
+            holder.category.setText(highlight.getCategory());
         }
 
-        holder.category.setText(highlight.getCategory());
         holder.highlightss.setText(highlight.getNotedtext());
+
         holder.tv_readmore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

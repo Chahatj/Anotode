@@ -78,8 +78,8 @@ public class NotesDataHandler extends SQLiteOpenHelper
         values.put("comment",highlight.getComment());
         values.put("tag1",highlight.getTag1());
         values.put("tag2",highlight.getTag2());
-        values.put("tag3",highlight.getTag2());
-        values.put("tag4",highlight.getTag2());
+        values.put("tag3",highlight.getTag3());
+        values.put("tag4",highlight.getTag4());
         values.put("category",highlight.getCategory());
         db.insert("Highlights", null, values);
         db.close();

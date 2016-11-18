@@ -1,6 +1,7 @@
 package com.example.chahat.anotode;
 
 
+import android.app.DownloadManager;
 import android.app.SearchManager;
 import android.content.ComponentName;
 import android.content.Context;
@@ -276,6 +277,10 @@ public class AnotodeStore extends AppCompatActivity
             editor.apply();
 
         }
+        else if (id==R.id.nav_download)
+        {
+            download();
+        }
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -428,6 +433,29 @@ public class AnotodeStore extends AppCompatActivity
         {
             loadPicture(sharedPreferences.getString("picture_url",null));
         }
+    }
+
+
+    public void download()
+    {
+        String token = sharedPreferences.getString("token",null);
+
+
+        String url = "http://anotode.herokuapp.com/api/highlights/export?token="+token;
+        DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url));
+   //     request.setDescription("Some descrition");
+      //  request.setTitle("Some title");
+// in order for this if to run, you must use the android 3.2 to compile your app
+
+            request.allowScanningByMediaScanner();
+            request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+
+        request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, "AnotodeData.txt");
+
+// get download service and enqueue file
+        DownloadManager manager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
+        manager.enqueue(request);
+
     }
 
 

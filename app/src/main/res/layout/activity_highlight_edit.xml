@@ -72,7 +72,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/file"
-        android:layout_below="@+id/icon_url"
+        android:layout_below="@+id/tv_url"
         android:layout_marginTop="20dp"
         android:layout_marginLeft="10dp"/>
 
@@ -80,10 +80,9 @@
         android:id="@+id/et_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/icon_url"
         android:layout_toRightOf="@+id/icon_title"
         android:layout_marginLeft="10dp"
-        android:layout_marginTop="22dp"
+        android:layout_marginTop="15dp"
         android:layout_marginRight="10dp"
         android:layout_alignBottom="@+id/icon_title"
         />
@@ -93,7 +92,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/tag"
-        android:layout_below="@+id/icon_title"
+        android:layout_below="@+id/et_title"
         android:layout_marginTop="28dp"
         android:layout_marginLeft="10dp"/>
 
@@ -116,7 +115,6 @@
        android:layout_below="@+id/icon_title"
        android:layout_toRightOf="@+id/et_tag1"
        android:layout_marginLeft="10dp"
-       android:hint="Optional"
        android:layout_marginTop="22dp"
        android:layout_marginRight="10dp"
        android:layout_alignBottom="@+id/icon_tag"
@@ -127,7 +125,6 @@
        android:layout_width="150dp"
        android:layout_height="wrap_content"
        android:layout_below="@+id/et_tag1"
-       android:hint="Optional"
       android:layout_alignLeft="@+id/et_tag1"
        android:layout_marginTop="10dp"
        android:layout_marginRight="10dp"
@@ -140,7 +137,6 @@
        android:layout_below="@+id/et_tag2"
        android:layout_toRightOf="@+id/et_tag3"
        android:layout_alignLeft="@+id/et_tag2"
-       android:hint="Optional"
        android:layout_marginTop="10dp"
        android:layout_marginRight="10dp"
        />

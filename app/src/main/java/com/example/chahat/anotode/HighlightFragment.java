@@ -188,54 +188,83 @@ public class HighlightFragment extends Fragment implements SwipeRefreshLayout.On
                                     String time = jsonObject.getString("time");
 
                                     String url = jsonObject.getString("url");
-                                    String title = jsonObject.getString("title");
-                                    String notedtext = jsonObject.getString("text");
-                                    String comment = jsonObject.getString("comment");
-                                    String category = jsonObject.getString("category");
-                                   // String tags = jsonObject.getString("tags");
 
-                                    JSONArray tagsArray = jsonObject.getJSONArray("tags");
+                                    String title,comment,category,tag1;
 
-                                    for (int j=0;j<tagsArray.length();j++)
-                                    {
-                                        tag = tagsArray.getString(j);
-
-                                        taglist.add(tag);
-
-                                        Log.d("tag",tag);
-                                    }
-
-                                    String tag1 = taglist.get(0);
-
-
-                                    if (taglist.size()==2){
-
-                                        tag2 = taglist.get(1);
-                                        tag3 = "";
-                                        tag4 = "";
-
-                                    }
-                                    else if (taglist.size()==3)
-                                    {
-                                        tag2 = taglist.get(1);
-                                        tag3 = taglist.get(2);
-                                        tag4 = "";
-
-                                    }
-                                    else if (taglist.size()==4)
-                                    {
-                                        tag2 = taglist.get(1);
-                                        tag3 = taglist.get(2);
-                                        tag4 = taglist.get(3);
+                                    if(jsonObject.has("title")){
+                                        title = jsonObject.getString("title");
                                     }
                                     else {
-                                        tag2="";
-                                        tag3="";
-                                        tag4="";
+                                        title = "notitle";
                                     }
 
-                                    taglist.clear();
+                                    String notedtext = jsonObject.getString("text");
 
+                                    if (jsonObject.has("comment"))
+                                    {
+                                        comment = jsonObject.getString("comment");
+                                    }
+                                    else {
+                                        comment = "nocomment";
+                                    }
+
+                                    if (jsonObject.has("category"))
+                                    {
+                                        category = jsonObject.getString("category");
+                                    }
+                                    else {
+                                        category= "nocategory";
+                                    }
+
+
+                                   // String tags = jsonObject.getString("tags");
+
+                                    if (jsonObject.has("tags")&& jsonObject.getJSONArray("tags").length()!=0) {
+
+                                        JSONArray tagsArray = jsonObject.getJSONArray("tags");
+
+                                        for (int j = 0; j < tagsArray.length(); j++) {
+                                            tag = tagsArray.getString(j);
+
+                                            taglist.add(tag);
+
+                                            Log.d("tag", tag);
+                                        }
+
+                                        tag1 = taglist.get(0);
+
+
+                                        if (taglist.size() == 2) {
+
+                                            tag2 = taglist.get(1);
+                                            tag3 = "notag3";
+                                            tag4 = "notag4";
+
+                                        } else if (taglist.size() == 3) {
+                                            tag2 = taglist.get(1);
+                                            tag3 = taglist.get(2);
+                                            tag4 = "notag4";
+
+                                        } else if (taglist.size() == 4) {
+                                            tag2 = taglist.get(1);
+                                            tag3 = taglist.get(2);
+                                            tag4 = taglist.get(3);
+                                        } else {
+                                            tag2 = "notag2";
+                                            tag3 = "notag3";
+                                            tag4 = "notag4";
+                                        }
+
+                                        taglist.clear();
+
+                                    }
+                                    else {
+                                        tag1 = "notag1";
+                                        tag2 = "notag2";
+                                        tag3 = "notag3";
+                                        tag4 = "notag4";
+                                    }
+                                    Log.d("in4", tag1 + tag2 + tag3 + tag4);
 
                                     Highlight highlight = new Highlight(id, time, url, title, notedtext, comment, tag1,tag2,tag3,tag4, category);
 

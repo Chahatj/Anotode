@@ -74,6 +74,11 @@
                 android:layout_marginTop="15dp"
                 android:layout_marginLeft="3dp"/>
 
+            <RelativeLayout
+                android:id="@+id/rr"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_notes">
 
             <Button
                 android:id="@+id/bt_tag1"
@@ -82,8 +87,8 @@
                 android:text="Tag"
                 android:textColor="@android:color/white"
                 android:textStyle="bold"
-                android:layout_below="@+id/tv_notes"
                 android:enabled="false"
+                android:layout_marginBottom="5dp"
                 android:background="@drawable/round"
                 android:layout_marginLeft="3dp"
                 android:layout_marginTop="20dp"
@@ -96,11 +101,11 @@
                 android:text="Tag"
                 android:textColor="@android:color/white"
                 android:textStyle="bold"
-                android:layout_below="@+id/tv_notes"
                 android:enabled="false"
                 android:layout_toRightOf="@+id/bt_tag1"
                 android:background="@drawable/roundtag2"
                 android:layout_marginLeft="3dp"
+                android:layout_marginBottom="5dp"
                 android:layout_marginTop="20dp"
                 />
 
@@ -111,7 +116,7 @@
                 android:text="Tag"
                 android:textColor="@android:color/white"
                 android:textStyle="bold"
-                android:layout_below="@+id/tv_notes"
+                android:layout_marginBottom="5dp"
                 android:enabled="false"
                 android:layout_toRightOf="@+id/bt_tag2"
                 android:background="@drawable/roundtag3"
@@ -126,25 +131,26 @@
                 android:text="Tag"
                 android:textColor="@android:color/white"
                 android:textStyle="bold"
-                android:layout_below="@+id/tv_notes"
                 android:enabled="false"
                 android:layout_toRightOf="@+id/bt_tag3"
                 android:background="@drawable/roundtag4"
                 android:layout_marginLeft="3dp"
                 android:layout_marginTop="20dp"
+                android:layout_marginBottom="5dp"
                 />
+
+            </RelativeLayout>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Read More"
+                android:text="Read More>>"
                 android:id="@+id/tv_readmore"
                 android:textStyle="bold"
-                android:layout_alignTop="@+id/bt_category"
-               android:layout_toRightOf="@+id/bt_category"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="10dp"
-
+                android:layout_alignParentEnd="true"
+                android:layout_below="@+id/bt_category"
+                android:layout_marginBottom="30dp"
+                android:layout_marginRight="20dp"
                 />
 
 
@@ -158,10 +164,9 @@
                 android:background="@drawable/roundcategory"
                 android:textColor="@android:color/white"
                 android:textStyle="bold"
-                android:layout_alignLeft="@+id/bt_tag1"
-                android:layout_below="@+id/bt_tag1"
+                android:layout_alignLeft="@+id/icon_notes"
+                android:layout_below="@+id/rr"
                 android:layout_marginTop="5dp"
-                android:layout_marginBottom="20dp"
                 android:enabled="false"
                 />
 
