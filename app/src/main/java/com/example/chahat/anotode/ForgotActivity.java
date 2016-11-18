@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.support.design.widget.Snackbar;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -14,9 +15,11 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.android.volley.NoConnectionError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
+import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
@@ -28,6 +31,8 @@ public class ForgotActivity extends AppCompatActivity {
 
     EditText etemail;
     Snackbar snackbar;
+
+    TextInputLayout inputLayoutemail;
 
     String SERVER_ADDRESS = "http://anotode.herokuapp.com/api/login/forgot_password";
 
@@ -49,6 +54,7 @@ public class ForgotActivity extends AppCompatActivity {
         });
 
         etemail = (EditText) findViewById(R.id.et_email);
+        inputLayoutemail = (TextInputLayout) findViewById(R.id.input_layout_email);
 
     }
 
@@ -66,12 +72,17 @@ public class ForgotActivity extends AppCompatActivity {
 
         if (id==R.id.action_ok)
         {
-
-            if (isNetworkAvailable(getApplicationContext())) {
+            if (etemail.getText().toString().isEmpty())
+            {
+                inputLayoutemail.setErrorEnabled(true);
+                inputLayoutemail.setError("enter email");
+            }
+            else {
+                if (isNetworkAvailable(getApplicationContext())) {
 
                     resetpassword();
                 }
-            else {
+                else {
                     snackbar.make(findViewById(android.R.id.content), "No Internet Connection", Snackbar.LENGTH_LONG)
                             .setAction("No Internet Connection", new View.OnClickListener() {
                                 @Override
@@ -80,6 +91,9 @@ public class ForgotActivity extends AppCompatActivity {
                                 }
                             }).show();
                 }
+            }
+
+
             }
 
 
@@ -125,8 +139,20 @@ public class ForgotActivity extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         // TODO Auto-generated method stub
+                        if (error instanceof TimeoutError || error instanceof NoConnectionError) {
+                            snackbar.make(findViewById(android.R.id.content), "Slow Internet", Snackbar.LENGTH_LONG)
+                                    .setAction("Retry", new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
 
-                        Toast.makeText(getBaseContext(),"Slow network connection",Toast.LENGTH_LONG).show();
+                                        }
+                                    }).show();
+                        }
+                            else{
+                                inputLayoutemail.setErrorEnabled(true);
+                                inputLayoutemail.setError("enter a valid email");
+
+                            }
 
                     }
                 });

@@ -100,15 +100,23 @@
         android:layout_marginLeft="25dp"
         android:id="@+id/tv_notes"/>
 
+   <android.support.design.widget.TextInputLayout
+       android:id="@+id/input_layout_notes"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:layout_below="@+id/tv_notes"
+       android:layout_alignLeft="@+id/tv_notes"
+       android:layout_marginRight="10dp">
+
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textMultiLine"
         android:ems="10"
         android:id="@+id/input_notes"
-        android:layout_below="@+id/tv_notes"
-        android:layout_alignLeft="@+id/tv_notes"
-        android:layout_marginRight="10dp"/>
+       />
+
+   </android.support.design.widget.TextInputLayout>
 
     <TextView
         android:layout_width="match_parent"

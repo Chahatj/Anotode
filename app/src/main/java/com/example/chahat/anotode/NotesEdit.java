@@ -8,6 +8,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.net.ConnectivityManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -54,6 +55,7 @@ public class NotesEdit extends AppCompatActivity {
     TextView tvtime;
 
     EditText ettitle,etnotedtext,ettag1,ettag2,ettag3,ettag4,etcategory;
+    TextInputLayout inputLayoutnotes;
 
     Spinner spcategory;
 
@@ -97,6 +99,8 @@ public class NotesEdit extends AppCompatActivity {
         ettag4 = (EditText) findViewById(R.id.et_tag4);
         spcategory = (Spinner) findViewById(R.id.sp_category);
         etcategory = (EditText) findViewById(R.id.et_category);
+
+        inputLayoutnotes = (TextInputLayout) findViewById(R.id.input_layout_notes);
 
         String[] myStrings = getIntent().getStringArrayExtra("strings");
 
@@ -274,7 +278,8 @@ public class NotesEdit extends AppCompatActivity {
             if (etnotedtext.getText().toString().isEmpty())
             {
 
-                Toast.makeText(getApplicationContext(),"Fill Notes",Toast.LENGTH_SHORT).show();
+                inputLayoutnotes.setErrorEnabled(true);
+                inputLayoutnotes.setError("enter notes");
             }
             else {
 
@@ -458,7 +463,13 @@ public class NotesEdit extends AppCompatActivity {
                     public void onErrorResponse(VolleyError error) {
                         // TODO Auto-generated method stub
 
-                        Toast.makeText(getBaseContext(),"Slow network connection",Toast.LENGTH_LONG).show();
+                        snackbar.make(findViewById(android.R.id.content), "Slow Connection", Snackbar.LENGTH_LONG)
+                                .setAction("Retry", new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+                                        Log.d("snackbar", "snackbar clicked");
+                                    }
+                                }).show();
 
                     }
                 });

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.support.design.widget.Snackbar;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -32,6 +33,7 @@ public class ChangePwdActivity extends AppCompatActivity {
     Snackbar snackbar;
 
     EditText et_oldpwd,et_newpwd;
+    TextInputLayout inputLayoutpasswordold,inputLayoutpasswordnew;
 
     SharedPreferences sharedPreferences;
 
@@ -56,6 +58,8 @@ public class ChangePwdActivity extends AppCompatActivity {
 
         et_oldpwd = (EditText) findViewById(R.id.et_oldpwd);
         et_newpwd = (EditText) findViewById(R.id.et_newpwd);
+        inputLayoutpasswordold = (TextInputLayout) findViewById(R.id.input_layout_passwordold);
+        inputLayoutpasswordnew = (TextInputLayout) findViewById(R.id.input_layout_passwordnew);
 
         sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
     }
@@ -75,7 +79,19 @@ public class ChangePwdActivity extends AppCompatActivity {
         if (id==R.id.action_ok) {
 
             if (et_oldpwd.getText().toString().isEmpty() || et_newpwd.getText().toString().isEmpty()) {
-                Toast.makeText(getApplicationContext(), "Fill empty fields", Toast.LENGTH_SHORT).show();
+
+                if (et_oldpwd.getText().toString().isEmpty())
+                {
+                    inputLayoutpasswordold.setErrorEnabled(true);
+                    inputLayoutpasswordold.setError("enter old password");
+                    inputLayoutpasswordnew.setErrorEnabled(false);
+                }
+                else {
+                    inputLayoutpasswordold.setErrorEnabled(false);
+                    inputLayoutpasswordnew.setErrorEnabled(true);
+                    inputLayoutpasswordnew.setError("enter new password");
+                }
+
             } else {
 
                 if (et_oldpwd.getText().toString().equals(sharedPreferences.getString("password", null))) {
@@ -91,7 +107,8 @@ public class ChangePwdActivity extends AppCompatActivity {
                                 }).show();
                     }
                 } else {
-                    Toast.makeText(getApplicationContext(), "You entered wrong password", Toast.LENGTH_SHORT).show();
+                    inputLayoutpasswordold.setErrorEnabled(true);
+                    inputLayoutpasswordold.setError("enter your previous password");
                 }
             }
         }
@@ -122,6 +139,9 @@ public class ChangePwdActivity extends AppCompatActivity {
 
                             editor.putString("password",et_newpwd.getText().toString());
                             editor.apply();
+
+                            Toast.makeText(getApplicationContext(),"Password changed",Toast.LENGTH_SHORT).show();
+
                             finish();
 
 
@@ -135,7 +155,13 @@ public class ChangePwdActivity extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(getBaseContext(),"Slow network connection",Toast.LENGTH_LONG).show();
+                        snackbar.make(findViewById(android.R.id.content), "Slow Connection", Snackbar.LENGTH_LONG)
+                                .setAction("Retry", new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+                                        Log.d("snackbar", "snackbar clicked");
+                                    }
+                                }).show();
                     }
                 }){
 

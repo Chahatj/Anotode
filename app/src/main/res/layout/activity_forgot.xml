@@ -37,15 +37,23 @@
             android:layout_marginLeft="10dp"
             android:textSize="15sp"/>
 
-        <EditText
-            android:id="@+id/et_email"
-            android:inputType="textEmailAddress"
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/input_layout_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tv_username"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
-            android:layout_marginBottom="50dp"/>
+            android:layout_marginBottom="50dp">
+
+        <EditText
+            android:id="@+id/et_email"
+            android:inputType="textEmailAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+
+        </android.support.design.widget.TextInputLayout>
 
     </RelativeLayout>
 

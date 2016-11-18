@@ -9,6 +9,7 @@ import android.net.Uri;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -51,6 +52,7 @@ import java.util.Map;
 public class AddNotesActivity extends AppCompatActivity {
 
     EditText title,notes,tag1,tag2,tag3,tag4,etcategory;
+    TextInputLayout inputLayoutnotes;
     Spinner spinner;
     NotesDataHandler notesDataHandler;
     String id,category,tit,not,ta,ta2,ta3,ta4;
@@ -97,6 +99,8 @@ public class AddNotesActivity extends AppCompatActivity {
         tag4 = (EditText) findViewById(R.id.input_tag4);
         spinner = (Spinner) findViewById(R.id.spinner);
         etcategory = (EditText) findViewById(R.id.et_category);
+
+        inputLayoutnotes = (TextInputLayout) findViewById(R.id.input_layout_notes);
 
         icontitle = (ImageView) findViewById(R.id.icon_title);
         icontag = (ImageView) findViewById(R.id.icon_tag);
@@ -293,7 +297,8 @@ public class AddNotesActivity extends AppCompatActivity {
 
             if (notes.getText().toString().isEmpty())
             {
-                Toast.makeText(getApplicationContext(),"Fill Notes",Toast.LENGTH_SHORT).show();}
+                inputLayoutnotes.setErrorEnabled(true);
+                inputLayoutnotes.setError("enter notes");}
 
             else {
 
@@ -454,7 +459,13 @@ public class AddNotesActivity extends AppCompatActivity {
                     public void onErrorResponse(VolleyError error) {
                         // TODO Auto-generated method stub
 
-                        Toast.makeText(getBaseContext(),"Slow network connection",Toast.LENGTH_LONG).show();
+                        snackbar.make(findViewById(android.R.id.content), "Slow Internet", Snackbar.LENGTH_LONG)
+                                .setAction("Retry", new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+
+                                    }
+                                }).show();
 
                     }
                 });

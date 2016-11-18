@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.drm.DrmStore;
 import android.net.ConnectivityManager;
 import android.support.design.widget.Snackbar;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -46,6 +47,8 @@ public class LogInActivity extends AppCompatActivity {
     Snackbar snackbar;
     TextView forgot;
 
+    TextInputLayout inputLayoutemail,inputLayoutpassword;
+
 
 
 
@@ -65,6 +68,9 @@ public class LogInActivity extends AppCompatActivity {
         bt_login = (Button) findViewById(R.id.btn_login);
         forgot = (TextView) findViewById(R.id.forgot);
 
+        inputLayoutemail = (TextInputLayout) findViewById(R.id.input_layout_email);
+        inputLayoutpassword = (TextInputLayout) findViewById(R.id.input_layout_password);
+
         forgot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -82,8 +88,21 @@ public class LogInActivity extends AppCompatActivity {
                 email = et_email.getText().toString();
                 password = et_password.getText().toString();
 
-                if (email.trim().isEmpty() || password.trim().isEmpty()) {
-                    Toast.makeText(getApplicationContext(), "Fill empty fields", Toast.LENGTH_SHORT).show();
+                if (email.trim().isEmpty() || password.trim().isEmpty())
+                {
+                    if (email.trim().isEmpty())
+                    {
+                       inputLayoutpassword.setErrorEnabled(false);
+                       inputLayoutemail.setErrorEnabled(true);
+                        inputLayoutemail.setError("Enter your email");
+                    }
+                    else
+                    {
+                        inputLayoutemail.setErrorEnabled(false);
+                        inputLayoutpassword.setErrorEnabled(true);
+                        inputLayoutpassword.setError("Enter your password");
+                    }
+
                 } else {
 
                     if (android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
@@ -118,7 +137,10 @@ public class LogInActivity extends AppCompatActivity {
                         }
                     }
                     else{
-                        Toast.makeText(getApplicationContext(),"Not a valid email",Toast.LENGTH_SHORT).show();
+
+                        inputLayoutemail.setErrorEnabled(true);
+                        inputLayoutemail.setError("Email is invalid");
+                        inputLayoutpassword.setErrorEnabled(false);
                     }
 
 
@@ -190,14 +212,27 @@ public class LogInActivity extends AppCompatActivity {
                     public void onErrorResponse(VolleyError error) {
 
                         if (error instanceof TimeoutError || error instanceof NoConnectionError) {
-                            Toast.makeText(getApplicationContext(), "Slow network connection",
-                                    Toast.LENGTH_SHORT).show();
+                            snackbar.make(findViewById(android.R.id.content), "Slow Internet", Snackbar.LENGTH_LONG)
+                                    .setAction("Retry", new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+                                            bt_login.performClick();
+                                        }
+                                    }).show();
                         } else if (error instanceof AuthFailureError) {
-                            Toast.makeText(getApplicationContext(), "You entered wrong password or wrong email",
-                                    Toast.LENGTH_SHORT).show();
+
+                            inputLayoutemail.setErrorEnabled(true);
+                            inputLayoutemail.setError("Recheck your email");
+
+                            inputLayoutpassword.setErrorEnabled(true);
+                            inputLayoutpassword.setError("Recheck your password");
                         }
                         else {
-                            Toast.makeText(getApplicationContext(),"You entered wrong password or wrong email",Toast.LENGTH_SHORT).show();
+                            inputLayoutemail.setErrorEnabled(true);
+                            inputLayoutemail.setError("Recheck your email");
+
+                            inputLayoutpassword.setErrorEnabled(true);
+                            inputLayoutpassword.setError("Recheck your password");
                         }
 
                     }

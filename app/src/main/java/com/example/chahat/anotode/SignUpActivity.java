@@ -6,11 +6,13 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
+import android.support.design.widget.TextInputLayout;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -72,9 +74,10 @@ public class SignUpActivity extends AppCompatActivity implements  GoogleApiClien
     SignInButton signInButton;
 
 
-    EditText et_username,et_email,et_password;
+    EditText et_username,et_email,et_password,et_confirmpassword;
+    TextView textView;
     Button bt_signup;
-    String username,email,password,picture,picture_url;
+    String username,email,password,picture,picture_url,confirmpassword;
 
     String SERVER_ADDRESS = "http://anotode.herokuapp.com/api/users";
 
@@ -90,6 +93,8 @@ public class SignUpActivity extends AppCompatActivity implements  GoogleApiClien
     Snackbar snackbar;
     ProgressBar progressBar;
 
+    TextInputLayout inputLayoutemail,inputLayoutusername,inputLayoutpassword,inputLayoutpasswordconfirm;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -100,13 +105,13 @@ public class SignUpActivity extends AppCompatActivity implements  GoogleApiClien
 
         getSupportActionBar().setTitle("Signup");*/
 
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+        /*GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
                 .requestIdToken("1036953527322-jpr9phlk6sd97jt6fdn00kd31ohhthi1.apps.googleusercontent.com") //by the web credential
                 .build();
 
         mGoogleApiClient = new GoogleApiClient.Builder(this)
-                .enableAutoManage(this /* FragmentActivity */, this /* OnConnectionFailedListener */)
+                .enableAutoManage(this *//* FragmentActivity *//*, this *//* OnConnectionFailedListener *//*)
                 .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
                 .build();
 
@@ -119,13 +124,19 @@ public class SignUpActivity extends AppCompatActivity implements  GoogleApiClien
                 Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
                 startActivityForResult(signInIntent,2);
             }
-        });
+        });*/
 
+        inputLayoutemail = (TextInputLayout) findViewById(R.id.input_layout_email);
+        inputLayoutusername = (TextInputLayout) findViewById(R.id.input_layout_username);
+        inputLayoutpassword = (TextInputLayout) findViewById(R.id.input_layout_password);
+        inputLayoutpasswordconfirm = (TextInputLayout) findViewById(R.id.input_layout_passwordconfirm);
 
+        textView = (TextView) findViewById(R.id.textView);
 
         et_username = (EditText) findViewById(R.id.input_username);
         et_email = (EditText) findViewById(R.id.input_email);
         et_password = (EditText) findViewById(R.id.input_password);
+        et_confirmpassword = (EditText) findViewById(R.id.input_passwordconfirm);
         bt_signup = (Button) findViewById(R.id.btn_signup);
         imageButton = (de.hdodenhof.circleimageview.CircleImageView) findViewById(R.id.imageButton);
         progressBar = (ProgressBar) findViewById(R.id.loading_spinner);
@@ -167,35 +178,93 @@ public class SignUpActivity extends AppCompatActivity implements  GoogleApiClien
                 username = et_username.getText().toString();
                 email = et_email.getText().toString();
                 password = et_password.getText().toString();
+                confirmpassword = et_confirmpassword.getText().toString();
 
 
-    if (username.trim().isEmpty() || email.trim().isEmpty() || password.trim().isEmpty() || f==null)
+    if (username.trim().isEmpty() || email.trim().isEmpty() || password.trim().isEmpty() || f==null || confirmpassword.trim().isEmpty())
     {
-        Toast.makeText(getApplicationContext(),"Fill empty fields",Toast.LENGTH_SHORT).show();
+       if (username.trim().isEmpty())
+       {
+           inputLayoutusername.setErrorEnabled(true);
+           inputLayoutusername.setError("enter username");
+
+           inputLayoutemail.setErrorEnabled(false);
+           inputLayoutpassword.setErrorEnabled(false);
+           inputLayoutpasswordconfirm.setErrorEnabled(false);
+           textView.setTextColor(Color.BLACK);
+       }
+        else if (email.trim().isEmpty())
+       {
+           inputLayoutemail.setErrorEnabled(true);
+           inputLayoutemail.setError("enter email");
+
+           inputLayoutusername.setErrorEnabled(false);
+           inputLayoutpassword.setErrorEnabled(false);
+           inputLayoutpasswordconfirm.setErrorEnabled(false);
+           textView.setTextColor(Color.BLACK);
+       }
+        else if (password.trim().isEmpty())
+       {
+           inputLayoutpassword.setErrorEnabled(true);
+           inputLayoutpassword.setError("enter password");
+
+           inputLayoutemail.setErrorEnabled(false);
+           inputLayoutusername.setErrorEnabled(false);
+           inputLayoutpasswordconfirm.setErrorEnabled(false);
+           textView.setTextColor(Color.BLACK);
+       }
+        else if (confirmpassword.trim().isEmpty())
+       {
+           inputLayoutpasswordconfirm.setErrorEnabled(true);
+           inputLayoutpasswordconfirm.setError("confirm password");
+
+           inputLayoutemail.setErrorEnabled(false);
+           inputLayoutpassword.setErrorEnabled(false);
+           inputLayoutusername.setErrorEnabled(false);
+           textView.setTextColor(Color.BLACK);
+
+       }
+        else if (f==null)
+       {
+           textView.setTextColor(Color.RED);
+
+           inputLayoutemail.setErrorEnabled(false);
+           inputLayoutpassword.setErrorEnabled(false);
+           inputLayoutpasswordconfirm.setErrorEnabled(false);
+           inputLayoutusername.setErrorEnabled(false);
+       }
     }
-    else
-    {
-        if (android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            if (isNetworkAvailable(getApplicationContext())) {
+    else {
+        if (password.matches(confirmpassword)) {
 
-                User user = new User(username, email, password, picture_url);
-                registerUser(user);
+            if (android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                if (isNetworkAvailable(getApplicationContext())) {
+
+                    User user = new User(username, email, password, picture_url);
+                    registerUser(user);
+                } else {
+                    snackbar.make(findViewById(android.R.id.content), "No Internet Connection", Snackbar.LENGTH_LONG)
+                            .setAction("No Internet Connection", new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    Log.d("snackbar", "snackbar clicked");
+                                }
+                            }).show();
+                }
             } else {
-                snackbar.make(findViewById(android.R.id.content), "No Internet Connection", Snackbar.LENGTH_LONG)
-                        .setAction("No Internet Connection", new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                Log.d("snackbar", "snackbar clicked");
-                            }
-                        }).show();
+                inputLayoutemail.setErrorEnabled(true);
+                inputLayoutemail.setError("enter a valid email");
+
+                inputLayoutpasswordconfirm.setErrorEnabled(false);
             }
+
+
         }
         else {
-            Toast.makeText(getApplicationContext(),"Not a valid email",Toast.LENGTH_SHORT).show();
+
+            inputLayoutpasswordconfirm.setErrorEnabled(true);
+            inputLayoutpasswordconfirm.setError("password doesn't match");
         }
-
-
-
     }
 
     }
@@ -262,14 +331,14 @@ public class SignUpActivity extends AppCompatActivity implements  GoogleApiClien
 
         }
 
-        else if (requestCode ==2) {
+       /* else if (requestCode ==2) {
             GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
             handleSignInResult(result);
         }
-
+*/
     }
 
-    private void handleSignInResult(GoogleSignInResult result) {
+   /* private void handleSignInResult(GoogleSignInResult result) {
       //  Log.d(TAG, "handleSignInResult:" + result.isSuccess());
         if (result.isSuccess()) {
             // Signed in successfully, show authenticated UI.
@@ -288,7 +357,7 @@ public class SignUpActivity extends AppCompatActivity implements  GoogleApiClien
             // Signed out, show unauthenticated UI.
            Log.d("error","errorrr");
         }
-    }
+    }*/
 
 
 
@@ -361,10 +430,17 @@ public class SignUpActivity extends AppCompatActivity implements  GoogleApiClien
                         {
                             if (response.statusCode==400)
                             {
-                                Toast.makeText(getBaseContext(),"Email already used",Toast.LENGTH_LONG).show();
+                                inputLayoutemail.setErrorEnabled(true);
+                                inputLayoutemail.setError("Email is already used");
                             }
                             else{
-                                Toast.makeText(getBaseContext(),"Slow internet connection...wait",Toast.LENGTH_LONG).show();
+                                snackbar.make(findViewById(android.R.id.content), "Slow internet", Snackbar.LENGTH_LONG)
+                                        .setAction("Retry", new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View view) {
+                                               bt_signup.performClick();
+                                            }
+                                        }).show();
                             }
                         }
 

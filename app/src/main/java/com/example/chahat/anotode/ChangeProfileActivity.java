@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Environment;
@@ -43,6 +44,8 @@ public class ChangeProfileActivity extends AppCompatActivity {
 
     de.hdodenhof.circleimageview.CircleImageView imageButton;
 
+    TextView textView;
+
     File f;
 
     String picture_url;
@@ -76,15 +79,31 @@ public class ChangeProfileActivity extends AppCompatActivity {
 
         imageButton = (de.hdodenhof.circleimageview.CircleImageView) findViewById(R.id.imageButton);
         progressBar = (ProgressBar) findViewById(R.id.loading_spinner);
+        textView = (TextView) findViewById(R.id.textView);
 
         imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(Intent.ACTION_PICK,
-                        android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                if (isNetworkAvailable(getApplicationContext()))
+                {
+                    Intent intent = new Intent(Intent.ACTION_PICK,
+                            android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
 
-                startActivityForResult(intent, 1);
+                    startActivityForResult(intent, 1);
+                }
+                else{
+                    snackbar.make(findViewById(android.R.id.content), "No Internet", Snackbar.LENGTH_LONG)
+                            .setAction("Connect", new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+
+                                }
+                            }).show();
+                }
+
+
+
 
 
             }
@@ -192,7 +211,7 @@ public class ChangeProfileActivity extends AppCompatActivity {
 
             if (f==null)
             {
-                Toast.makeText(getApplicationContext(),"Please choose profile",Toast.LENGTH_SHORT).show();
+             textView.setTextColor(Color.RED);
             }
             else{
                 if (isNetworkAvailable(getApplicationContext())) {
@@ -259,7 +278,13 @@ public class ChangeProfileActivity extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(getBaseContext(),"Slow network connection",Toast.LENGTH_LONG).show();
+                        snackbar.make(findViewById(android.R.id.content), "Slow Connection", Snackbar.LENGTH_LONG)
+                                .setAction("Retry", new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+
+                                    }
+                                }).show();
                     }
                 }){
             @Override

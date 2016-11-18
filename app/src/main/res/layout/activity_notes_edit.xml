@@ -182,12 +182,20 @@
         android:layout_marginLeft="10dp"
         android:layout_marginTop="20dp">
 
+       <android.support.design.widget.TextInputLayout
+           android:id="@+id/input_layout_notes"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:layout_marginRight="10dp">
+
         <EditText
             android:id="@+id/et_note"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginRight="10dp"
+
             />
+
+       </android.support.design.widget.TextInputLayout>
 
     </ScrollView>
 

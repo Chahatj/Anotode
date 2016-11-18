@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.support.design.widget.Snackbar;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -30,6 +31,7 @@ import java.util.Map;
 public class ChangeUsernameActivity extends AppCompatActivity {
 
     EditText et_newusername;
+    TextInputLayout inputLayoutusername;
     Snackbar snackbar;
 
     SharedPreferences sharedPreferences;
@@ -54,6 +56,7 @@ public class ChangeUsernameActivity extends AppCompatActivity {
         });
 
         et_newusername = (EditText) findViewById(R.id.et_newusername);
+        inputLayoutusername = (TextInputLayout) findViewById(R.id.input_layout_username);
         sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
 
 
@@ -77,7 +80,8 @@ public class ChangeUsernameActivity extends AppCompatActivity {
         {
             if (et_newusername.getText().toString().isEmpty())
             {
-                Toast.makeText(getApplicationContext(),"Please enter username",Toast.LENGTH_SHORT).show();
+               inputLayoutusername.setErrorEnabled(true);
+                inputLayoutusername.setError("enter a username");
             }
             else {
 
@@ -124,6 +128,9 @@ public class ChangeUsernameActivity extends AppCompatActivity {
 
                             editor.putString("username",changed);
                             editor.apply();
+
+                            Toast.makeText(getApplicationContext(),"Username changed",Toast.LENGTH_SHORT).show();
+
                             finish();
 
 
@@ -137,7 +144,13 @@ public class ChangeUsernameActivity extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(getBaseContext(),"Slow network connection",Toast.LENGTH_LONG).show();
+                        snackbar.make(findViewById(android.R.id.content), "Slow Connection", Snackbar.LENGTH_LONG)
+                                .setAction("Retry", new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+                                        Log.d("snackbar", "snackbar clicked");
+                                    }
+                                }).show();
                     }
                 }){
 

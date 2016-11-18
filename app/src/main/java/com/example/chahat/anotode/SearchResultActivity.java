@@ -13,9 +13,12 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -145,7 +148,9 @@ public class SearchResultActivity extends AppCompatActivity {
             {
                 finish();
 
-               Toast.makeText(this,"No internet connection",Toast.LENGTH_SHORT).show();
+               Toast.makeText(getApplicationContext(),"No internet connection",Toast.LENGTH_SHORT).show();
+
+
             }
 
 
@@ -336,7 +341,13 @@ public class SearchResultActivity extends AppCompatActivity {
                     public void onErrorResponse(VolleyError error) {
                         // Toast.makeText(getActivity(),error.toString(),Toast.LENGTH_LONG).show();
 
-                        Toast.makeText(getBaseContext(),"Slow network connection",Toast.LENGTH_LONG).show();
+                        snackbar.make(findViewById(android.R.id.content), "Slow Connection", Snackbar.LENGTH_LONG)
+                                .setAction("Retry", new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+                                        Log.d("snackbar", "snackbar clicked");
+                                    }
+                                }).show();
                     }
                 }){
            /* @Override
