@@ -3,6 +3,7 @@ package com.example.chahat.anotode;
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.RecyclerView;
+import android.text.util.Linkify;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -61,7 +62,7 @@ public class HighlightRecyclerAdapter extends RecyclerView.Adapter<HighlightRecy
     }
 
     @Override
-    public void onBindViewHolder(MyViewHolder holder,final int position) {
+    public void onBindViewHolder(final MyViewHolder holder, final int position) {
         Highlight highlight = highlightList.get(position);
         holder.time.setText(highlight.getTime());
         holder.url.setText(highlight.getUrl());

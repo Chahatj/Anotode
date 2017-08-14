@@ -78,9 +78,9 @@ public class ChangePwdActivity extends AppCompatActivity {
 
         if (id==R.id.action_ok) {
 
-            if (et_oldpwd.getText().toString().isEmpty() || et_newpwd.getText().toString().isEmpty()) {
+            if (et_oldpwd.getText().toString().trim().isEmpty() || et_newpwd.getText().toString().trim().isEmpty()) {
 
-                if (et_oldpwd.getText().toString().isEmpty())
+                if (et_oldpwd.getText().toString().trim().isEmpty())
                 {
                     inputLayoutpasswordold.setErrorEnabled(true);
                     inputLayoutpasswordold.setError("enter old password");

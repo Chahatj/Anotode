@@ -264,7 +264,7 @@ public class NotesEdit extends AppCompatActivity {
         {
             if (category.equals("Others"))
             {
-                if (etcategory.getText().toString().isEmpty())
+                if (etcategory.getText().toString().trim().isEmpty())
                 {
                     category = "nocategory";
                 }
@@ -275,7 +275,7 @@ public class NotesEdit extends AppCompatActivity {
             }
 
 
-            if (etnotedtext.getText().toString().isEmpty())
+            if (etnotedtext.getText().toString().trim().isEmpty())
             {
 
                 inputLayoutnotes.setErrorEnabled(true);
@@ -359,7 +359,7 @@ public class NotesEdit extends AppCompatActivity {
 
         ArrayList<String> numbers = new ArrayList<String>();
 
-        if (!(tag1.isEmpty()))
+        if (!(tag1.trim().isEmpty()))
         {
             numbers.add(tag1);
         }
@@ -367,7 +367,7 @@ public class NotesEdit extends AppCompatActivity {
             tag1 = "notag1";
         }
 
-        if (!(tag2.isEmpty()))
+        if (!(tag2.trim().isEmpty()))
         {
             numbers.add(tag2);
         }
@@ -375,7 +375,7 @@ public class NotesEdit extends AppCompatActivity {
             tag2 = "notag2";
         }
 
-        if (!(tag3.isEmpty()))
+        if (!(tag3.trim().isEmpty()))
         {
             numbers.add(tag3);
         }
@@ -383,7 +383,7 @@ public class NotesEdit extends AppCompatActivity {
             tag3 = "notag3";
         }
 
-        if (!(tag4.isEmpty()))
+        if (!(tag4.trim().isEmpty()))
         {
             numbers.add(tag4);
         }
@@ -395,7 +395,7 @@ public class NotesEdit extends AppCompatActivity {
 
         try {
 
-            if (!(title.isEmpty()))
+            if (!(title.trim().isEmpty()))
             {
                 params.put("title", ettitle.getText().toString());
             }

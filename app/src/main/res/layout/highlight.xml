@@ -15,7 +15,6 @@
         android:layout_gravity="center"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
         card_view:cardCornerRadius="2dp"
         >
 
@@ -28,7 +27,8 @@
             android:layout_height="wrap_content"
             android:text="time:"
             android:id="@+id/tv_time"
-            android:layout_alignParentEnd="true"/>
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="5dp"/>
 
 
         <TextView
@@ -151,13 +151,13 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Read More>>"
+                android:text="Read More"
                 android:id="@+id/tv_readmore"
                 android:textStyle="bold"
                 android:layout_alignParentEnd="true"
                 android:layout_below="@+id/bt_category"
-                android:layout_marginBottom="30dp"
-                android:layout_marginRight="20dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginRight="10dp"
                 />
 
             <Button
@@ -181,23 +181,6 @@
         </RelativeLayout>
 
         </android.support.v7.widget.CardView>
-
-    <View
-        android:id="@+id/view"
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:layout_marginTop="13dp"
-        android:layout_below="@+id/card_view"
-        android:background="@android:color/darker_gray"
-        />
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:layout_marginTop="5dp"
-        android:layout_below="@+id/view"
-        android:layout_marginBottom="13dp"
-        android:background="@android:color/darker_gray"/>
 
 
 

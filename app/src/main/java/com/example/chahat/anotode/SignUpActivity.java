@@ -181,19 +181,9 @@ public class SignUpActivity extends AppCompatActivity implements  GoogleApiClien
                 confirmpassword = et_confirmpassword.getText().toString();
 
 
-    if (username.trim().isEmpty() || email.trim().isEmpty() || password.trim().isEmpty() || f==null || confirmpassword.trim().isEmpty())
+    if (email.trim().isEmpty() || password.trim().isEmpty() || f==null || confirmpassword.trim().isEmpty())
     {
-       if (username.trim().isEmpty())
-       {
-           inputLayoutusername.setErrorEnabled(true);
-           inputLayoutusername.setError("enter username");
-
-           inputLayoutemail.setErrorEnabled(false);
-           inputLayoutpassword.setErrorEnabled(false);
-           inputLayoutpasswordconfirm.setErrorEnabled(false);
-           textView.setTextColor(Color.BLACK);
-       }
-        else if (email.trim().isEmpty())
+       if (email.trim().isEmpty())
        {
            inputLayoutemail.setErrorEnabled(true);
            inputLayoutemail.setError("enter email");
@@ -227,6 +217,7 @@ public class SignUpActivity extends AppCompatActivity implements  GoogleApiClien
         else if (f==null)
        {
            textView.setTextColor(Color.RED);
+           textView.setTextSize(16);
 
            inputLayoutemail.setErrorEnabled(false);
            inputLayoutpassword.setErrorEnabled(false);
@@ -234,13 +225,26 @@ public class SignUpActivity extends AppCompatActivity implements  GoogleApiClien
            inputLayoutusername.setErrorEnabled(false);
        }
     }
+    else if (password.trim().length()<6 || confirmpassword.trim().length()<6)
+    {
+        if (password.trim().length()<6)
+        {
+            inputLayoutpassword.setErrorEnabled(true);
+            inputLayoutpassword.setError("min length is 6");
+        }
+        else if (confirmpassword.trim().length()<6)
+        {
+            inputLayoutpasswordconfirm.setErrorEnabled(true);
+            inputLayoutpasswordconfirm.setError("min length is 6");
+        }
+    }
     else {
         if (password.matches(confirmpassword)) {
 
             if (android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
                 if (isNetworkAvailable(getApplicationContext())) {
 
-                    User user = new User(username, email, password, picture_url);
+                    User user = new User(username.trim(), email, password, picture_url);
                     registerUser(user);
                 } else {
                     snackbar.make(findViewById(android.R.id.content), "No Internet Connection", Snackbar.LENGTH_LONG)
@@ -414,7 +418,7 @@ public class SignUpActivity extends AppCompatActivity implements  GoogleApiClien
                         startActivity(intent);
                         finish();
 
-                        Toast.makeText(getBaseContext(),"Successfully register", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getBaseContext(),"Verify your account...visit to gmail..", Toast.LENGTH_LONG).show();
                         Log.d("response",response);
                     }
                 },
@@ -424,7 +428,10 @@ public class SignUpActivity extends AppCompatActivity implements  GoogleApiClien
 
                         NetworkResponse response = error.networkResponse;
 
-                        Log.v("res",response+"");
+                        String ee = new String(response.data);
+
+
+                        Log.v("reserror",ee);
 
                         if (response!=null)
                         {
@@ -452,7 +459,11 @@ public class SignUpActivity extends AppCompatActivity implements  GoogleApiClien
             @Override
             protected Map<String,String> getParams(){
                 Map<String,String> params = new HashMap<String, String>();
-                params.put("username", user.username);
+                if (!(user.username.isEmpty()))
+                {
+                    params.put("username", user.username);
+                }
+
                 Log.d("username",user.username);
                 params.put("email", user.email);
                 params.put("password", user.password);

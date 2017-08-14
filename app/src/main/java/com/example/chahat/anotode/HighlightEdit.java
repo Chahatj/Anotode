@@ -96,6 +96,8 @@ public class HighlightEdit extends AppCompatActivity {
         etcomment = (EditText) findViewById(R.id.et_comment);
         ettag1 = (EditText) findViewById(R.id.et_tag1);
         ettag2 = (EditText) findViewById(R.id.et_tag2);
+        ettag3 = (EditText) findViewById(R.id.et_tag3);
+        ettag4 = (EditText) findViewById(R.id.et_tag4);
         spcategory = (Spinner) findViewById(R.id.sp_category);
         etcategory = (EditText) findViewById(R.id.et_category);
 
@@ -112,6 +114,7 @@ public class HighlightEdit extends AppCompatActivity {
         tag3 = myStrings[8];
         tag4 = myStrings[9];
         category = myStrings[10];
+
 
         getSupportActionBar().setTitle("Update Highlight");
 
@@ -277,7 +280,7 @@ public class HighlightEdit extends AppCompatActivity {
         {
             if (category.equals("Others"))
             {
-                if (etcategory.getText().toString().isEmpty())
+                if (etcategory.getText().toString().trim().isEmpty())
                 {
                     category = "nocategory";
                 }
@@ -353,17 +356,18 @@ public class HighlightEdit extends AppCompatActivity {
 
         };*/
 
+            title = ettitle.getText().toString();
+            tag1 = ettag1.getText().toString();
+            tag2 = ettag2.getText().toString();
+            tag3 = ettag3.getText().toString();
+            tag4 = ettag4.getText().toString();
+            comment = etcomment.getText().toString();
 
-        title = ettitle.getText().toString();
-        tag1 = ettag1.getText().toString();
-        tag2 = ettag2.getText().toString();
-        tag3 = ettag3.getText().toString();
-        tag4  = ettag4.getText().toString();
-        comment = etcomment.getText().toString();
+
 
         ArrayList<String> numbers = new ArrayList<String>();
 
-        if (!(tag1.isEmpty()))
+        if (!(tag1.trim().isEmpty()))
         {
             numbers.add(tag1);
         }
@@ -371,7 +375,7 @@ public class HighlightEdit extends AppCompatActivity {
             tag1 = "notag1";
         }
 
-        if (!(tag2.isEmpty()))
+        if (!(tag2.trim().isEmpty()))
         {
             numbers.add(tag2);
         }
@@ -379,7 +383,7 @@ public class HighlightEdit extends AppCompatActivity {
             tag2 = "notag2";
         }
 
-        if (!(tag3.isEmpty()))
+        if (!(tag3.trim().isEmpty()))
         {
             numbers.add(tag3);
         }
@@ -387,7 +391,7 @@ public class HighlightEdit extends AppCompatActivity {
             tag3 = "notag3";
         }
 
-        if (!(tag4.isEmpty()))
+        if (!(tag4.trim().isEmpty()))
         {
             numbers.add(tag4);
         }
@@ -395,7 +399,7 @@ public class HighlightEdit extends AppCompatActivity {
             tag4 = "notag4";
         }
 
-        if (comment.isEmpty())
+        if (comment.trim().isEmpty())
         {
             comment="nocomment";
         }
@@ -407,7 +411,7 @@ public class HighlightEdit extends AppCompatActivity {
 
         try {
 
-            if (!(title.equals("notitle")))
+            if (!(title.trim().isEmpty()))
             {
                 params.put("title", title);
             }
@@ -415,9 +419,12 @@ public class HighlightEdit extends AppCompatActivity {
                 title = "notitle";
             }
 
-            if (!(comment.equals("nocomment")))
+            if (!(comment.trim().isEmpty()))
             {
                 params.put("comment",comment);
+            }
+            else{
+                comment = "nocomment";
             }
 
             if (!(category.equals("nocategory")))
@@ -455,7 +462,7 @@ public class HighlightEdit extends AppCompatActivity {
                     @Override
                     public void onResponse(JSONObject response) {
 
-                        dh.updateNotes(id,title,tvnotedText.getText().toString(),comment,tag1,tag2,tag3,tag4,category);
+                        dh.updateNotes(id,title,notedtext,comment,tag1,tag2,tag3,tag4,category);
 
                         Intent intent = new Intent(getApplicationContext(),highlight_detail.class);
                         intent.putExtra("updateChecking",787);

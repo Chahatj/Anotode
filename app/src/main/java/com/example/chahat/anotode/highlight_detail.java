@@ -13,6 +13,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.text.util.Linkify;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -121,6 +122,13 @@ public class highlight_detail extends AppCompatActivity {
 
         tv_title.setText(title);
         tv_url.setText(url);
+
+        tv_url.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Linkify.addLinks(tv_url, Linkify.WEB_URLS);
+            }
+        });
 
         if (tag1.equals("notag1"))
         {

@@ -72,7 +72,7 @@ public class ForgotActivity extends AppCompatActivity {
 
         if (id==R.id.action_ok)
         {
-            if (etemail.getText().toString().isEmpty())
+            if (etemail.getText().toString().trim().isEmpty())
             {
                 inputLayoutemail.setErrorEnabled(true);
                 inputLayoutemail.setError("enter email");

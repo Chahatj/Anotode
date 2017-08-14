@@ -22,6 +22,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.NetworkResponse;
 import com.android.volley.NoConnectionError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -98,12 +99,21 @@ public class LogInActivity extends AppCompatActivity {
                     }
                     else
                     {
-                        inputLayoutemail.setErrorEnabled(false);
-                        inputLayoutpassword.setErrorEnabled(true);
-                        inputLayoutpassword.setError("Enter your password");
+
+                            inputLayoutemail.setErrorEnabled(false);
+                            inputLayoutpassword.setErrorEnabled(true);
+                            inputLayoutpassword.setError("Enter your password");
                     }
 
-                } else {
+                }
+                else if (password.length()<6)
+                {
+                    inputLayoutemail.setErrorEnabled(false);
+                    inputLayoutpassword.setErrorEnabled(true);
+                    inputLayoutpassword.setError("Min length is 6");
+                }
+
+                else {
 
                     if (android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
 
@@ -210,6 +220,14 @@ public class LogInActivity extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
+
+                        NetworkResponse response = error.networkResponse;
+
+                        String news = new String(response.data);
+
+
+
+                        Log.v("dkd",news);
 
                         if (error instanceof TimeoutError || error instanceof NoConnectionError) {
                             snackbar.make(findViewById(android.R.id.content), "Slow Internet", Snackbar.LENGTH_LONG)

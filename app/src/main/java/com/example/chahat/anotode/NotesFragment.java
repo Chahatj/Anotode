@@ -142,6 +142,8 @@ public class NotesFragment extends Fragment implements SwipeRefreshLayout.OnRefr
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
 
+
+
         recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getActivity(), recyclerView, new ClickListener() {
             @Override
             public void onClick(View view, int position) {

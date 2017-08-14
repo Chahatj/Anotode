@@ -78,7 +78,7 @@ public class ChangeUsernameActivity extends AppCompatActivity {
 
         if (id==R.id.action_ok)
         {
-            if (et_newusername.getText().toString().isEmpty())
+            if (et_newusername.getText().toString().trim().isEmpty())
             {
                inputLayoutusername.setErrorEnabled(true);
                 inputLayoutusername.setError("enter a username");

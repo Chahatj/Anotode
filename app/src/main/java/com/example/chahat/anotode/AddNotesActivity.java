@@ -285,7 +285,7 @@ public class AddNotesActivity extends AppCompatActivity {
         {
             if (category.equals("Others"))
             {
-                if (etcategory.getText().toString().isEmpty())
+                if (etcategory.getText().toString().trim().isEmpty())
                 {
                     category = "nocategory";
                 }
@@ -295,7 +295,7 @@ public class AddNotesActivity extends AppCompatActivity {
 
             }
 
-            if (notes.getText().toString().isEmpty())
+            if (notes.getText().toString().trim().isEmpty())
             {
                 inputLayoutnotes.setErrorEnabled(true);
                 inputLayoutnotes.setError("enter notes");}
@@ -322,7 +322,7 @@ public class AddNotesActivity extends AppCompatActivity {
 
     private void save_send_Notes() {
 
-        if (title.getText().toString().isEmpty())
+        if (title.getText().toString().trim().isEmpty())
         {
             tit = "notitle";
         }
@@ -333,28 +333,28 @@ public class AddNotesActivity extends AppCompatActivity {
 
         not = notes.getText().toString();
 
-       if (tag1.getText().toString().isEmpty())
+       if (tag1.getText().toString().trim().isEmpty())
        {
            ta = "notag1";
        }
         else {
            ta = tag1.getText().toString();
        }
-        if (tag2.getText().toString().isEmpty())
+        if (tag2.getText().toString().trim().isEmpty())
         {
             ta2 = "notag2";
         }
         else {
             ta2 = tag2.getText().toString();
         }
-        if (tag3.getText().toString().isEmpty())
+        if (tag3.getText().toString().trim().isEmpty())
         {
             ta3 = "notag3";
         }
         else {
             ta3 = tag3.getText().toString();
         }
-        if (tag4.getText().toString().isEmpty())
+        if (tag4.getText().toString().trim().isEmpty())
         {
             ta4 = "notag4";
         }
